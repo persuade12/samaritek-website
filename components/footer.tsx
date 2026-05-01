@@ -18,7 +18,13 @@ export function Footer() {
               />
             </div>
             <p className="text-[#657786] leading-relaxed mb-6 max-w-md">
-              Samaritan Technologies - Technology that serves. We're your trusted partner in digital transformation.
+              SamariTek builds software and cloud systems for organisations across Africa—technology that serves your
+              mission, not the other way around.
+            </p>
+            <p className="text-sm text-[#657786]/90 mb-6">
+              <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
+                info@samaritek.co.zw
+              </a>
             </p>
             {/* Social links */}
             <div className="flex gap-4">
@@ -68,7 +74,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#657786]/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#657786] text-sm">© 2025 SamariTek. All rights reserved.</p>
+          <p className="text-[#657786] text-sm">© {new Date().getFullYear()} SamariTek. All rights reserved.</p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
               Privacy Policy

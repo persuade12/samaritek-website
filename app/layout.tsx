@@ -9,10 +9,9 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "SamariTek - Technology That Serves Humanity",
+  title: "SamariTek — Software & cloud engineering for Africa",
   description:
-    "Your trusted partner in digital transformation. Samaritan Technologies delivers custom software, cloud solutions, and expert consultancy.",
-  generator: "v0.app",
+    "SamariTek partners with organisations across Africa on custom software, web platforms, cloud infrastructure, and digital transformation.",
   icons: {
     icon: [
       {

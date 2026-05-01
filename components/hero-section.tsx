@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useEffect, useRef } from "react"
 
@@ -92,32 +93,36 @@ export function HeroSection() {
         </h2>
 
         <p className="text-base md:text-lg lg:text-xl text-[#EBD9C8]/90 mb-8 max-w-3xl mx-auto leading-relaxed text-pretty font-light tracking-wide">
-          World-class software solutions crafted with precision.
+          Custom software, web, and cloud for teams across Africa—crafted with precision.
           <br className="hidden md:block" />
-          Built to transform businesses. Designed to empower people.
+          Built to transform organisations. Designed for real-world scale.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
           <Button
+            asChild
             size="lg"
             className="bg-white hover:bg-white/90 text-black px-10 py-6 text-base font-semibold rounded-full shadow-2xl shadow-white/20 hover:shadow-white/30 hover:scale-105 transition-all duration-500 group"
           >
-            Start Your Project
-            <svg
-              className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <Link href="/contact" className="inline-flex items-center">
+              Start Your Project
+              <svg
+                className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </Button>
           <Button
+            asChild
             size="lg"
             variant="ghost"
             className="text-white hover:text-[#FEA02F] px-10 py-6 text-base font-semibold rounded-full border-2 border-white/20 hover:border-[#FEA02F]/50 hover:bg-[#FEA02F]/5 hover:scale-105 transition-all duration-500"
           >
-            Explore Our Work
+            <Link href="/work">How we work</Link>
           </Button>
         </div>
 
@@ -175,7 +180,7 @@ export function HeroSection() {
         </div>
 
         <div className="mt-8">
-          <p className="text-xs text-[#657786] font-light tracking-wider">TRUSTED BY LEADING BUSINESSES WORLDWIDE</p>
+          <p className="text-xs text-[#657786] font-light tracking-wider">ENGINEERING FOR AFRICAN SCALE</p>
         </div>
 
         <div className="mt-6">

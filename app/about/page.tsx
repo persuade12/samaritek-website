@@ -12,8 +12,8 @@ export default function AboutPage() {
               About <span className="text-[#FEA02F]">SamariTek</span>
             </h1>
             <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
-              We're a team of passionate engineers and designers committed to building exceptional digital experiences
-              that drive real business results.
+              We are engineers and designers focused on exceptional digital experiences for organisations across
+              Africa—built for clarity, performance, and lasting business impact.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-3xl font-bold text-white mb-4">Our Vision</h3>
               <p className="text-lg text-[#EBD9C8]/70 leading-relaxed">
-                To be the trusted technology partner for ambitious organizations worldwide, recognized for our
+                To be a trusted technology partner for ambitious organisations across Africa, recognized for our
                 exceptional craftsmanship and transformative impact.
               </p>
             </div>

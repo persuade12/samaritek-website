@@ -96,8 +96,8 @@ export default function ServicesPage() {
               Our <span className="text-[#FEA02F]">Services</span>
             </h1>
             <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive technology solutions tailored to your business needs. From concept to deployment, we deliver
-              excellence at every stage.
+              End-to-end technology for teams across Africa—from strategy and architecture to shipped software you can
+              run, measure, and grow.
             </p>
           </div>
 

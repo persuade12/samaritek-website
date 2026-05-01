@@ -82,7 +82,7 @@ export function ServicesGrid() {
           Our <span className="text-[#FEA02F]">Solutions</span>
         </h2>
         <p className="text-xl text-[#d1d1d1] max-w-2xl mx-auto leading-relaxed">
-          Comprehensive technology services designed to transform your business and drive meaningful results.
+          Technology services for organisations across Africa—from discovery to deployment and beyond.
         </p>
       </div>
 

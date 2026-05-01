@@ -31,8 +31,12 @@ export default function ContactPage() {
               Let's <span className="text-[#FEA02F]">Connect</span>
             </h1>
             <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
-              Ready to transform your business with world-class technology? Let's discuss your project and explore how
-              we can help.
+              Whether you are scaling a product or modernising operations, we help teams across Africa turn ideas into
+              reliable software. Tell us what you are building—we will respond on{" "}
+              <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
+                info@samaritek.co.zw
+              </a>
+              .
             </p>
           </div>
 
@@ -113,24 +117,12 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-                <p className="text-[#EBD9C8]/70">hello@samaritek.com</p>
-                <p className="text-[#EBD9C8]/70">support@samaritek.com</p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
-                <p className="text-[#EBD9C8]/70">+1 (555) 123-4567</p>
-                <p className="text-[#EBD9C8]/70">Mon-Fri, 9am-6pm EST</p>
+                <a
+                  href="mailto:info@samaritek.co.zw"
+                  className="text-[#FEA02F] hover:underline block font-medium"
+                >
+                  info@samaritek.co.zw
+                </a>
               </div>
 
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
@@ -150,9 +142,10 @@ export default function ContactPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Office</h3>
-                <p className="text-[#EBD9C8]/70">123 Tech Street</p>
-                <p className="text-[#EBD9C8]/70">San Francisco, CA 94105</p>
+                <h3 className="text-xl font-bold text-white mb-2">Where we work</h3>
+                <p className="text-[#EBD9C8]/70 leading-relaxed">
+                  Remote-first engineering, partnering with organisations across the continent.
+                </p>
               </div>
             </div>
           </div>

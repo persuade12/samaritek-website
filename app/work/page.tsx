@@ -38,9 +38,9 @@ export default function WorkPage() {
               Our <span className="text-[#FEA02F]">Work</span>
             </h1>
             <p className="text-lg md:text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed text-pretty">
-              The best work happens when your domain expertise meets disciplined engineering. This page is about how we
-              collaborate—from clarity at kickoff to shipped systems you can grow—so you know what partnering with us
-              feels like before we talk specifics.
+              The best work happens when your domain expertise meets disciplined engineering. We collaborate with teams
+              across Africa—from clarity at kickoff to systems you can grow—so you know what partnering with us feels
+              like before we talk specifics.
             </p>
           </div>
 

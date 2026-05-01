@@ -1,28 +1,32 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Heart, Users, Shield, Sparkles } from "lucide-react"
+import { ShieldCheck, Sparkles, UsersRound, BadgeCheck } from "lucide-react"
 
 const features = [
   {
-    icon: Heart,
-    title: "Helpful by Nature",
-    description: "We're here to guide and support you at every step of your journey. Your success is our purpose.",
-  },
-  {
-    icon: Users,
-    title: "Built for Humans",
-    description: "Technology that makes sense. We create intuitive solutions that people actually love to use.",
-  },
-  {
-    icon: Shield,
-    title: "Always Reliable",
-    description: "Your trusted partner in growth. We deliver on our promises with consistency and excellence.",
+    icon: ShieldCheck,
+    title: "Regulation-ready & standards-led",
+    description:
+      "We factor in applicable regulations, data protection expectations, and international engineering practice—so what we ship can stand up to real governance, security reviews, and audits.",
   },
   {
     icon: Sparkles,
-    title: "Innovation with Purpose",
-    description: "Cutting-edge solutions that serve real needs. We innovate to create meaningful impact.",
+    title: "Innovation that earns its place",
+    description:
+      "Modern architectures and tools where they reduce risk and time-to-value—not novelty for its own sake. We prototype fast, then harden for production.",
+  },
+  {
+    icon: UsersRound,
+    title: "Domain experts on your side",
+    description:
+      "A team that goes deep on your industry, workflows, and constraints before major build decisions—so requirements reflect how your organisation actually operates.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Quality you can run and extend",
+    description:
+      "Clear delivery practices, testing discipline, and handover you can own—documentation and observability aimed at systems your people can operate with confidence.",
   },
 ]
 
@@ -66,7 +70,8 @@ export function WhyChooseUs() {
             Why Choose <span className="text-[#FEA02F]">SamariTek</span>?
           </h2>
           <p className="text-xl text-[#d1d1d1] max-w-2xl mx-auto leading-relaxed">
-            We're more than a tech company. We're your partners in building something extraordinary.
+            Standards, innovation, and people who understand your domain—so delivery matches both the letter of what
+            matters and the reality of how you work.
           </p>
         </div>
 
