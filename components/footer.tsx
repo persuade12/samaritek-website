@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export function Footer() {
   return (
     <footer className="bg-[#0a0a0a] py-16 px-6 border-t border-[#657786]/20">
@@ -6,11 +8,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center">
-                <span className="text-xl font-bold text-white">S</span>
-              </div>
-              <h3 className="text-2xl font-bold text-[#FEA02F]">SamariTek</h3>
+            <div className="mb-4">
+              <Image
+                src="/samaritek-logo.png"
+                alt="SamariTek"
+                width={200}
+                height={72}
+                className="h-14 w-auto max-w-[240px] object-contain object-left"
+              />
             </div>
             <p className="text-[#657786] leading-relaxed mb-6 max-w-md">
               Samaritan Technologies - Technology that serves. We're your trusted partner in digital transformation.

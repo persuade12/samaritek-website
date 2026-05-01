@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
@@ -34,11 +35,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center shadow-lg shadow-[#FEA02F]/20 transition-transform group-hover:scale-110">
-              <span className="text-lg font-bold text-white">S</span>
-            </div>
-            <span className="text-lg font-semibold text-white tracking-tight">SamariTek</span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/samaritek-logo.png"
+              alt="SamariTek"
+              width={160}
+              height={56}
+              className="h-9 w-auto object-contain object-left transition-transform group-hover:scale-105 md:h-10"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
