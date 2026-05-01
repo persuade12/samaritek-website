@@ -84,7 +84,7 @@ export function ServicesGrid() {
   }, [])
 
   return (
-    <section className="py-32 px-6 bg-[#0a0a0a] relative">
+    <section id="our-solutions" className="scroll-mt-20 py-32 px-6 bg-[#0a0a0a] relative">
       {/* Section header */}
       <div className="max-w-7xl mx-auto mb-20 text-center">
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
@@ -96,7 +96,7 @@ export function ServicesGrid() {
       </div>
 
       {/* Services grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 items-stretch md:grid-cols-2 lg:grid-cols-4 gap-6">
         {services.map((service, index) => {
           const Icon = service.icon
           return (
@@ -105,12 +105,12 @@ export function ServicesGrid() {
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`transition-all duration-500 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+              className={`h-full transition-all duration-500 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <Link
                 href={`/get-started?service=${encodeURIComponent(service.getStartedSlug)}`}
-                className="group relative block p-8 rounded-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer"
+                className="group relative flex h-full min-h-[17rem] flex-col rounded-2xl p-8 backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer"
                 style={{
                   background: "rgba(235, 217, 200, 0.03)",
                   border: "1px solid rgba(235, 217, 200, 0.1)",
@@ -120,20 +120,20 @@ export function ServicesGrid() {
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#DE6600]/20 to-transparent pointer-events-none" />
 
               {/* Icon */}
-              <div className="relative mb-6">
+              <div className="relative mb-6 shrink-0">
                 <div className="w-14 h-14 rounded-xl bg-[#FEA02F]/10 flex items-center justify-center group-hover:bg-[#FEA02F]/20 transition-colors duration-300">
                   <Icon className="w-7 h-7 text-[#FEA02F] group-hover:scale-110 transition-transform duration-300" />
                 </div>
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#FEA02F] transition-colors duration-300">
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#FEA02F] transition-colors duration-300 shrink-0">
                 {service.title}
               </h3>
-              <p className="text-[#d1d1d1] leading-relaxed mb-4">{service.description}</p>
+              <p className="flex-1 text-[#d1d1d1] leading-relaxed mb-4">{service.description}</p>
 
               {/* Learn more link */}
-              <div className="flex items-center gap-2 text-[#FEA02F] font-semibold group-hover:gap-3 transition-all duration-300">
+              <div className="mt-auto flex shrink-0 items-center gap-2 text-[#FEA02F] font-semibold group-hover:gap-3 transition-all duration-300">
                 <span>Get started</span>
                 <svg
                   className="w-4 h-4"

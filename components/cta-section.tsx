@@ -1,59 +1,112 @@
 import Link from "next/link"
+import { ArrowRight, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+const highlights = [
+  { label: "Discovery to production", sub: "Clear milestones, no black box" },
+  { label: "Built for Africa", sub: "Payments, scale, and real constraints" },
+  { label: "Engineering you can grow", sub: "Systems that stay maintainable" },
+]
 
 export function CTASection() {
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#DE6600] via-[#FEA02F] to-[#DE6600] animate-gradient" />
+    <section className="relative overflow-hidden bg-[#050505] px-6 py-24 md:py-32">
+      {/* Ambient light */}
+      <div className="pointer-events-none absolute -top-32 left-1/2 h-[min(100vw,28rem)] w-[min(100vw,28rem)] -translate-x-1/2 rounded-full bg-[#FEA02F]/25 blur-[100px]" />
+      <div className="pointer-events-none absolute -bottom-24 right-[-10%] h-72 w-72 rounded-full bg-[#DE6600]/30 blur-[90px]" />
+      <div className="pointer-events-none absolute top-1/2 left-[-15%] h-56 w-56 -translate-y-1/2 rounded-full bg-[#FEA02F]/10 blur-[70px]" />
 
-      {/* Overlay pattern */}
-      <div className="pointer-events-none absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
+      {/* Soft grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.35] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,black,transparent)]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)`,
+          backgroundSize: "56px 56px",
+        }}
+      />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
-          Ready to transform your business?
-        </h2>
-        <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed text-pretty">
-          From first idea to production systems—we help teams across Africa ship software that lasts.
-        </p>
+      <div className="relative z-10 mx-auto max-w-5xl">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.12] bg-gradient-to-b from-white/[0.09] via-white/[0.03] to-transparent p-10 shadow-[0_0_0_1px_rgba(254,160,47,0.08),0_32px_64px_-20px_rgba(0,0,0,0.85)] backdrop-blur-sm md:p-14 lg:p-16">
+          {/* Top accent line */}
+          <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#FEA02F]/60 to-transparent md:inset-x-12" />
 
-        {/* CTA Button */}
-        <Button
-          asChild
-          size="lg"
-          className="bg-white text-[#DE6600] hover:bg-white/95 px-12 py-7 text-xl font-bold rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
-        >
-          <Link href="/get-started">Get Started Today</Link>
-        </Button>
+          {/* Corner glints */}
+          <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[#FEA02F]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -left-16 h-36 w-36 rounded-full bg-[#DE6600]/20 blur-3xl" />
 
-        <div className="mt-12 flex justify-center text-white/90">
-          <a
-            href="mailto:info@samaritek.co.zw"
-            className="flex items-center gap-2 hover:text-white transition-colors"
-          >
-            <svg
-              className="w-5 h-5 shrink-0"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            <span className="font-semibold">info@samaritek.co.zw</span>
-          </a>
+          <div className="relative mx-auto max-w-3xl text-center">
+            <span className="mb-6 inline-flex items-center justify-center rounded-full border border-[#FEA02F]/35 bg-[#FEA02F]/12 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#FEA02F] md:text-sm">
+              Partner with SamariTek
+            </span>
+
+            <h2 className="mb-6 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl">
+              Ready to transform{" "}
+              <span className="bg-gradient-to-r from-[#FEA02F] via-[#ffc266] to-[#DE6600] bg-clip-text text-transparent">
+                your business?
+              </span>
+            </h2>
+
+            <p className="mx-auto max-w-2xl text-pretty text-lg leading-relaxed text-[#EBD9C8]/85 md:text-xl">
+              From first idea to production systems—we help teams across Africa build software that lasts: clear scope,
+              honest timelines, and engineering you can extend without starting over.
+            </p>
+
+            {/* Mini pillars */}
+            <ul className="mx-auto mt-10 grid max-w-2xl gap-3 text-left sm:grid-cols-3 sm:gap-4">
+              {highlights.map((h) => (
+                <li
+                  key={h.label}
+                  className="rounded-xl border border-white/[0.08] bg-black/30 px-4 py-3.5 md:px-3 md:py-4"
+                >
+                  <p className="text-sm font-semibold text-white">{h.label}</p>
+                  <p className="mt-1 text-xs leading-snug text-[#657786]">{h.sub}</p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="group h-auto rounded-2xl bg-gradient-to-r from-[#FEA02F] to-[#DE6600] px-10 py-6 text-base font-bold text-white shadow-lg shadow-[#FEA02F]/25 transition-all duration-300 hover:scale-[1.02] hover:from-[#DE6600] hover:to-[#FEA02F] hover:shadow-[#FEA02F]/40"
+              >
+                <Link href="/get-started" className="inline-flex items-center justify-center gap-2">
+                  Get started today
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-auto rounded-2xl border-white/20 bg-white/5 px-8 py-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:border-[#FEA02F]/40 hover:bg-[#FEA02F]/10 hover:text-white"
+              >
+                <Link href="/packages">View packages &amp; quotes</Link>
+              </Button>
+            </div>
+
+            <div className="mt-12 flex flex-col items-center gap-3 border-t border-white/10 pt-10 sm:flex-row sm:justify-center sm:gap-6">
+              <a
+                href="mailto:info@samaritek.co.zw"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#EBD9C8]/90 transition-colors hover:text-[#FEA02F]"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#FEA02F]/15 text-[#FEA02F]">
+                  <Mail className="h-4 w-4" aria-hidden />
+                </span>
+                info@samaritek.co.zw
+              </a>
+              <span className="hidden text-[#657786] sm:inline" aria-hidden>
+                |
+              </span>
+              <Link
+                href="/contact"
+                className="text-sm font-medium text-[#EBD9C8]/80 underline-offset-4 transition-colors hover:text-[#FEA02F] hover:underline"
+              >
+                Prefer a conversation first? Contact us
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

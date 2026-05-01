@@ -1,8 +1,32 @@
 "use client"
 
 import Link from "next/link"
+import { BrainCircuit, Cloud, Code2, Smartphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useRef } from "react"
+
+const heroCapabilities = [
+  {
+    label: "Software Development",
+    href: "/get-started?service=software-development",
+    Icon: Code2,
+  },
+  {
+    label: "Mobile Development",
+    href: "/services#mobile-solutions",
+    Icon: Smartphone,
+  },
+  {
+    label: "AI & ML",
+    href: "/services#ai-ml",
+    Icon: BrainCircuit,
+  },
+  {
+    label: "Cloud Services",
+    href: "/services#cloud-solutions",
+    Icon: Cloud,
+  },
+] as const
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -127,56 +151,18 @@ export function HeroSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-          <div className="flex flex-col items-center gap-2 group cursor-pointer">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
-              <svg className="w-6 h-6 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <span className="text-xs text-[#EBD9C8]/80 font-medium">Web Applications</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 group cursor-pointer">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
-              <svg className="w-6 h-6 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-            <span className="text-xs text-[#EBD9C8]/80 font-medium">Mobile Solutions</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 group cursor-pointer">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
-              <svg className="w-6 h-6 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
-            </div>
-            <span className="text-xs text-[#EBD9C8]/80 font-medium">E-Commerce</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-2 group cursor-pointer">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
-              <svg className="w-6 h-6 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </div>
-            <span className="text-xs text-[#EBD9C8]/80 font-medium">Consulting</span>
-          </div>
+          {heroCapabilities.map(({ label, href, Icon }) => (
+            <Link
+              key={href}
+              href={href}
+              className="flex flex-col items-center gap-2 group cursor-pointer no-underline"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
+                <Icon className="h-6 w-6 text-[#FEA02F] transition-transform group-hover:scale-110" aria-hidden />
+              </div>
+              <span className="text-xs text-[#EBD9C8]/80 font-medium text-center leading-snug">{label}</span>
+            </Link>
+          ))}
         </div>
 
         <div className="mt-8">
@@ -184,19 +170,27 @@ export function HeroSection() {
         </div>
 
         <div className="mt-6">
-          <div className="inline-block animate-bounce">
+          <button
+            type="button"
+            onClick={() =>
+              document.getElementById("our-solutions")?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            className="inline-flex animate-bounce rounded-full p-2 text-[#FEA02F]/60 transition-colors hover:text-[#FEA02F] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEA02F]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            aria-label="Scroll to Our Solutions"
+          >
             <svg
-              className="w-5 h-5 text-[#FEA02F]/60"
+              className="w-5 h-5"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden
             >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
     </section>

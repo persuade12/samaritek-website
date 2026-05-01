@@ -112,7 +112,8 @@ export default function ServicesPage() {
             {services.map((service, i) => (
               <div
                 key={i}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-[#FEA02F]/30 transition-all duration-300 group"
+                id={service.slug}
+                className="scroll-mt-28 bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-[#FEA02F]/30 transition-all duration-300 group"
               >
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FEA02F]/20 to-[#DE6600]/20 border border-[#FEA02F]/30 flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-[#FEA02F] group-hover:to-[#DE6600] transition-all duration-300">
                   <svg
