@@ -1,9 +1,11 @@
+import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 
 export default function ServicesPage() {
   const services = [
     {
+      slug: "web-applications" as const,
       title: "Web Applications",
       description:
         "Enterprise-grade web applications built with modern frameworks, optimized for performance and scalability.",
@@ -18,6 +20,7 @@ export default function ServicesPage() {
       ),
     },
     {
+      slug: "mobile-solutions" as const,
       title: "Mobile Solutions",
       description:
         "Native and cross-platform mobile apps that deliver exceptional user experiences on iOS and Android.",
@@ -32,6 +35,7 @@ export default function ServicesPage() {
       ),
     },
     {
+      slug: "e-commerce" as const,
       title: "E-Commerce",
       description: "High-converting e-commerce platforms with seamless checkout experiences and powerful admin tools.",
       features: ["Online Store Development", "Payment Integration", "Inventory Management", "Marketing Automation"],
@@ -45,6 +49,7 @@ export default function ServicesPage() {
       ),
     },
     {
+      slug: "cloud-solutions" as const,
       title: "Cloud Solutions",
       description: "Scalable cloud infrastructure and migration services to power your digital transformation.",
       features: ["Cloud Migration", "DevOps Automation", "Serverless Architecture", "Infrastructure as Code"],
@@ -58,6 +63,7 @@ export default function ServicesPage() {
       ),
     },
     {
+      slug: "digital-consulting" as const,
       title: "Digital Consulting",
       description: "Strategic technology consulting to align your digital initiatives with business objectives.",
       features: ["Technology Strategy", "Digital Transformation", "Architecture Design", "Code Reviews"],
@@ -71,6 +77,7 @@ export default function ServicesPage() {
       ),
     },
     {
+      slug: "ai-ml" as const,
       title: "AI & ML Integration",
       description: "Intelligent solutions powered by artificial intelligence and machine learning technologies.",
       features: ["AI Model Development", "Natural Language Processing", "Computer Vision", "Predictive Analytics"],
@@ -121,7 +128,7 @@ export default function ServicesPage() {
                 <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
                 <p className="text-[#EBD9C8]/70 mb-6 leading-relaxed">{service.description}</p>
 
-                <ul className="space-y-2">
+                <ul className="space-y-2 mb-6">
                   {service.features.map((feature, j) => (
                     <li key={j} className="flex items-center gap-2 text-sm text-[#EBD9C8]/60">
                       <svg className="w-4 h-4 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,16 +138,24 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-[#FEA02F]/40 text-[#FEA02F] hover:bg-[#FEA02F]/10 rounded-xl"
+                >
+                  <Link href={`/get-started?service=${service.slug}`}>Get started with this</Link>
+                </Button>
               </div>
             ))}
           </div>
 
           <div className="text-center">
             <Button
+              asChild
               size="lg"
               className="bg-gradient-to-r from-[#FEA02F] to-[#DE6600] hover:from-[#DE6600] hover:to-[#FEA02F] text-white px-12 py-7 text-lg font-semibold rounded-full shadow-2xl shadow-[#FEA02F]/30 hover:shadow-[#FEA02F]/50 hover:scale-105 transition-all duration-300"
             >
-              Start Your Project
+              <Link href="/get-started">Start Your Project</Link>
             </Button>
           </div>
         </div>

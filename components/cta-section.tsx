@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 export function CTASection() {
@@ -28,10 +29,11 @@ export function CTASection() {
 
         {/* CTA Button */}
         <Button
+          asChild
           size="lg"
           className="bg-white text-[#DE6600] hover:bg-white/95 px-12 py-7 text-xl font-bold rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
         >
-          Get Started Today
+          <Link href="/get-started">Get Started Today</Link>
         </Button>
 
         <div className="mt-12 flex justify-center text-white/90">

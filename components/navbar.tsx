@@ -23,6 +23,7 @@ export function Navbar() {
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/work", label: "Work" },
+    { href: "/get-started", label: "Get started" },
     { href: "/contact", label: "Contact" },
   ]
 
@@ -66,10 +67,11 @@ export function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
             <Button
+              asChild
               size="sm"
               className="bg-gradient-to-r from-[#FEA02F] to-[#DE6600] hover:from-[#DE6600] hover:to-[#FEA02F] text-white px-6 rounded-full font-medium shadow-lg shadow-[#FEA02F]/30 hover:shadow-[#FEA02F]/50 hover:scale-105 transition-all duration-300"
             >
-              Get Started
+              <Link href="/get-started">Get Started</Link>
             </Button>
           </div>
 

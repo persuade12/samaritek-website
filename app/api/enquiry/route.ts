@@ -1,0 +1,102 @@
+import { NextResponse } from "next/server"
+import nodemailer from "nodemailer"
+import {
+  buildConfirmationHtml,
+  buildConfirmationPlain,
+  buildInternalEnquiryHtml,
+  buildInternalEnquiryPlain,
+} from "@/lib/enquiry-email-html"
+import { buildEnquiryBodySchema, getServiceBySlug } from "@/lib/get-started-services"
+
+export const runtime = "nodejs"
+
+export async function POST(req: Request) {
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    return NextResponse.json(
+      { error: "Email is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS on the server." },
+      { status: 503 },
+    )
+  }
+
+  let body: unknown
+  try {
+    body = await req.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
+  }
+
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return NextResponse.json({ error: "Invalid body" }, { status: 400 })
+  }
+
+  const raw = body as Record<string, unknown>
+  const slug = typeof raw.serviceSlug === "string" ? raw.serviceSlug : ""
+  const service = getServiceBySlug(slug)
+  if (!service) {
+    return NextResponse.json({ error: "Unknown service" }, { status: 400 })
+  }
+
+  const payload = {
+    ...raw,
+    serviceSlug: service.slug,
+  }
+
+  const parsed = buildEnquiryBodySchema(service).safeParse(payload)
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Validation failed", issues: parsed.error.flatten() }, { status: 400 })
+  }
+
+  const data = parsed.data
+  const port = Number(process.env.SMTP_PORT || "465")
+  const secure = process.env.SMTP_SECURE === "true" || port === 465
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port,
+    secure,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  })
+
+  const from = process.env.MAIL_FROM || '"SamariTek" <engine@samaritek.co.zw>'
+  const toEnquiries = process.env.MAIL_TO_ENQUIRIES || "enquiries@samaritek.co.zw"
+
+  const mailData = {
+    name: data.name,
+    email: data.email,
+    company: data.company || undefined,
+    message: data.message || undefined,
+    answers: data.answers as Record<string, string>,
+  }
+
+  const htmlInternal = buildInternalEnquiryHtml(service, mailData)
+  const textInternal = buildInternalEnquiryPlain(service, mailData)
+  const htmlConfirm = buildConfirmationHtml(data.name, service.title, toEnquiries)
+  const textConfirm = buildConfirmationPlain(data.name, service.title, toEnquiries)
+
+  try {
+    await transporter.sendMail({
+      from,
+      to: toEnquiries,
+      replyTo: data.email,
+      subject: `[SamariTek enquiry] ${service.title}`,
+      text: textInternal,
+      html: htmlInternal,
+    })
+
+    await transporter.sendMail({
+      from,
+      to: data.email,
+      subject: "We received your enquiry — SamariTek",
+      text: textConfirm,
+      html: htmlConfirm,
+    })
+  } catch (err) {
+    console.error("[api/enquiry]", err)
+    return NextResponse.json({ error: "Could not send email. Please try again later." }, { status: 500 })
+  }
+
+  return NextResponse.json({ ok: true })
+}

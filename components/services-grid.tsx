@@ -1,48 +1,57 @@
 "use client"
 
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { Code, Cloud, Globe, Link, CreditCard, Wrench, MessageSquare, ClipboardList } from "lucide-react"
+import { Code, Cloud, Globe, Link as LinkIcon, CreditCard, Wrench, MessageSquare, ClipboardList } from "lucide-react"
 
 const services = [
   {
     icon: Code,
     title: "Software Development",
     description: "Custom applications built for your unique needs, from concept to deployment.",
+    getStartedSlug: "software-development",
   },
   {
     icon: Cloud,
     title: "Cloud Solutions & Hosting",
     description: "Scalable, secure infrastructure that grows with your business.",
+    getStartedSlug: "cloud-solutions",
   },
   {
     icon: Globe,
     title: "Web Development",
     description: "Beautiful, high-performance websites that captivate and convert.",
+    getStartedSlug: "web-applications",
   },
   {
-    icon: Link,
+    icon: LinkIcon,
     title: "Integrations",
     description: "Seamless system connections that make your tools work together.",
+    getStartedSlug: "integrations",
   },
   {
     icon: CreditCard,
     title: "Payment Integrations",
     description: "Secure, smooth transaction experiences your customers will trust.",
+    getStartedSlug: "payment-integrations",
   },
   {
     icon: Wrench,
     title: "Custom Solutions",
     description: "Tailored technology for unique challenges and opportunities.",
+    getStartedSlug: "custom-solutions",
   },
   {
     icon: MessageSquare,
     title: "Consultancy",
     description: "Expert guidance for your tech journey, every step of the way.",
+    getStartedSlug: "digital-consulting",
   },
   {
     icon: ClipboardList,
     title: "Project Management",
     description: "Professional delivery, every time. Your success is our mission.",
+    getStartedSlug: "project-management",
   },
 ]
 
@@ -96,15 +105,17 @@ export function ServicesGrid() {
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`group relative p-8 rounded-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer ${
-                visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{
-                background: "rgba(235, 217, 200, 0.03)",
-                border: "1px solid rgba(235, 217, 200, 0.1)",
-                transitionDelay: `${index * 100}ms`,
-              }}
+              className={`transition-all duration-500 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
+              <Link
+                href={`/get-started?service=${encodeURIComponent(service.getStartedSlug)}`}
+                className="group relative block p-8 rounded-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer"
+                style={{
+                  background: "rgba(235, 217, 200, 0.03)",
+                  border: "1px solid rgba(235, 217, 200, 0.1)",
+                }}
+              >
               {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#DE6600]/20 to-transparent pointer-events-none" />
 
@@ -123,7 +134,7 @@ export function ServicesGrid() {
 
               {/* Learn more link */}
               <div className="flex items-center gap-2 text-[#FEA02F] font-semibold group-hover:gap-3 transition-all duration-300">
-                <span>Learn more</span>
+                <span>Get started</span>
                 <svg
                   className="w-4 h-4"
                   fill="none"
@@ -136,6 +147,7 @@ export function ServicesGrid() {
                   <path d="M9 5l7 7-7 7"></path>
                 </svg>
               </div>
+            </Link>
             </div>
           )
         })}

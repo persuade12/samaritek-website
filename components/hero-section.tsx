@@ -104,7 +104,7 @@ export function HeroSection() {
             size="lg"
             className="bg-white hover:bg-white/90 text-black px-10 py-6 text-base font-semibold rounded-full shadow-2xl shadow-white/20 hover:shadow-white/30 hover:scale-105 transition-all duration-500 group"
           >
-            <Link href="/contact" className="inline-flex items-center">
+            <Link href="/get-started" className="inline-flex items-center">
               Start Your Project
               <svg
                 className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
