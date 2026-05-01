@@ -5,10 +5,10 @@ export function CTASection() {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#DE6600] via-[#FEA02F] to-[#DE6600] animate-gradient" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#DE6600] via-[#FEA02F] to-[#DE6600] animate-gradient" />
 
       {/* Overlay pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="pointer-events-none absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
           style={{

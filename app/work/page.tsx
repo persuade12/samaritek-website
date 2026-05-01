@@ -30,9 +30,9 @@ export default function WorkPage() {
   return (
     <main className="min-h-screen bg-black">
       <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 md:mb-20">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight text-balance">
               Our <span className="text-[#FEA02F]">Work</span>

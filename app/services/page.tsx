@@ -95,9 +95,9 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-black">
       <section className="relative pt-32 pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
               Our <span className="text-[#FEA02F]">Services</span>
@@ -147,6 +147,18 @@ export default function ServicesPage() {
                 </Button>
               </div>
             ))}
+          </div>
+
+          <div className="max-w-4xl mx-auto mb-16 rounded-3xl border border-[#FEA02F]/25 bg-[#FEA02F]/5 px-8 py-10 text-center">
+            <h2 className="text-2xl font-bold text-white mb-3">New company or retail store?</h2>
+            <p className="text-[#EBD9C8]/80 mb-6 leading-relaxed">
+              Explore bundled <strong className="text-white font-semibold">online presence</strong>,{" "}
+              <strong className="text-white font-semibold">e‑commerce</strong>, and{" "}
+              <strong className="text-white font-semibold">digital growth</strong> packages—each quoted to your scope.
+            </p>
+            <Button asChild className="bg-gradient-to-r from-[#FEA02F] to-[#DE6600] text-white rounded-xl px-8">
+              <Link href="/packages">View packages &amp; request a quote</Link>
+            </Button>
           </div>
 
           <div className="text-center">

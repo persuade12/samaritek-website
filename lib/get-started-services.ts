@@ -497,9 +497,10 @@ export function isValidServiceSlug(slug: string): boolean {
   return GET_STARTED_SERVICES.some((s) => s.slug === slug.trim().toLowerCase())
 }
 
-export function buildAnswersSchema(service: GetStartedService) {
+/** Build Zod schema for answers from any questionnaire (service or package). */
+export function buildAnswersSchemaForQuestions(questions: QuestionField[]) {
   const shape: Record<string, z.ZodTypeAny> = {}
-  for (const q of service.questions) {
+  for (const q of questions) {
     if (q.type === "select" && q.options?.length) {
       const values = q.options.map((o) => o.value) as [string, ...string[]]
       const enumSchema = z.enum(values)
@@ -517,11 +518,15 @@ export function buildAnswersSchema(service: GetStartedService) {
   return z.object(shape).strict()
 }
 
+export function buildAnswersSchema(service: GetStartedService) {
+  return buildAnswersSchemaForQuestions(service.questions)
+}
+
 export function buildEnquiryBodySchema(service: GetStartedService) {
   return z
     .object({
       serviceSlug: z.literal(service.slug),
-      answers: buildAnswersSchema(service),
+      answers: buildAnswersSchemaForQuestions(service.questions),
       name: z.string().trim().min(1, "Name is required").max(120),
       email: z.string().email().max(254),
       company: z.union([z.string().max(200), z.literal("")]).optional(),

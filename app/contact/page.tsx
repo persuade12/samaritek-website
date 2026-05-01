@@ -38,9 +38,9 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-black">
       <section className="relative pt-32 pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
               Contact <span className="text-[#FEA02F]">SamariTek</span>

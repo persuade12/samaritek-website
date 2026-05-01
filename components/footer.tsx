@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -47,13 +48,26 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Solutions</h4>
             <ul className="space-y-3">
-              {["Software Development", "Cloud Solutions", "Web Development", "Consultancy"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link href="/services" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/packages" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  Packages &amp; quotes
+                </Link>
+              </li>
+              <li>
+                <Link href="/get-started" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  Get started
+                </Link>
+              </li>
+              <li>
+                <Link href="/work" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  Work
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -61,13 +75,16 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Company</h4>
             <ul className="space-y-3">
-              {["About Us", "Our Team", "Careers", "Contact"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link href="/about" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

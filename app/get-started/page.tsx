@@ -5,7 +5,7 @@ import { GetStartedWizard } from "./get-started-wizard"
 export const metadata: Metadata = {
   title: "Get started | SamariTek",
   description:
-    "Tell us what you need—choose a service, answer a few questions, and we will follow up by email.",
+    "Request a quote for a package or tell us which service you need—we follow up by email.",
 }
 
 function WizardFallback() {

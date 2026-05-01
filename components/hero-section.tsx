@@ -79,9 +79,9 @@ export function HeroSection() {
         style={{ background: "radial-gradient(ellipse at top, #1a1a1a 0%, #0a0a0a 100%)" }}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FEA02F]/10 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/10 via-transparent to-transparent" />
 
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FEA02F]/5 via-transparent to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FEA02F]/5 via-transparent to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.1] text-balance tracking-tight">

@@ -1,4 +1,5 @@
-import type { GetStartedService } from "@/lib/get-started-services"
+import type { OfferPackage } from "@/lib/offer-packages"
+import type { GetStartedService, QuestionField } from "@/lib/get-started-services"
 
 /** Safe for HTML body text (not attributes). */
 export function escapeHtml(text: string): string {
@@ -10,8 +11,8 @@ export function escapeHtml(text: string): string {
     .replace(/\r\n|\r|\n/g, "<br>")
 }
 
-function displayAnswerValue(service: GetStartedService, questionId: string, raw: string): string {
-  const q = service.questions.find((x) => x.id === questionId)
+function displayAnswerValue(questions: QuestionField[], questionId: string, raw: string): string {
+  const q = questions.find((x) => x.id === questionId)
   if (!q || !raw) return raw || "—"
   if (q.type === "select" && q.options) {
     const opt = q.options.find((o) => o.value === raw)
@@ -20,10 +21,10 @@ function displayAnswerValue(service: GetStartedService, questionId: string, raw:
   return raw
 }
 
-export function buildAnswerRows(service: GetStartedService, answers: Record<string, string>) {
-  return service.questions.map((q) => ({
+export function buildAnswerRows(questions: QuestionField[], answers: Record<string, string>) {
+  return questions.map((q) => ({
     label: q.label,
-    value: displayAnswerValue(service, q.id, answers[q.id] ?? ""),
+    value: displayAnswerValue(questions, q.id, answers[q.id] ?? ""),
   }))
 }
 
@@ -81,7 +82,7 @@ export function buildInternalEnquiryHtml(
     answers: Record<string, string>
   },
 ) {
-  const rows = buildAnswerRows(service, data.answers)
+  const rows = buildAnswerRows(service.questions, data.answers)
   const rowsHtml = rows
     .map(
       (r) => `
@@ -95,7 +96,7 @@ export function buildInternalEnquiryHtml(
   const inner = `
     <p style="margin:0 0 20px;color:${brand.orange};font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">New enquiry</p>
     <h1 style="margin:0 0 8px;color:#fff;font-size:22px;font-weight:700;">${escapeHtml(service.title)}</h1>
-    <p style="margin:0 0 24px;color:${brand.cream};opacity:0.85;font-size:14px;">Submitted via the Get started form.</p>
+    <p style="margin:0 0 20px;color:${brand.cream};opacity:0.85;font-size:14px;">Submitted via the Get started form.</p>
 
     <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:18px 20px;margin-bottom:22px;border:1px solid rgba(255,255,255,0.08);">
       <p style="margin:0 0 6px;color:#fff;font-weight:600;font-size:15px;">${escapeHtml(data.name)}</p>
@@ -119,6 +120,68 @@ export function buildInternalEnquiryHtml(
   return emailShell(`Enquiry: ${service.title}`, inner)
 }
 
+export function buildInternalPackageQuoteHtml(
+  pkg: OfferPackage,
+  data: {
+    name: string
+    email: string
+    company?: string
+    message?: string
+    answers: Record<string, string>
+  },
+) {
+  const rows = buildAnswerRows(pkg.questions, data.answers)
+  const rowsHtml = rows
+    .map(
+      (r) => `
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);color:#9ca3af;font-size:13px;width:38%;vertical-align:top;">${escapeHtml(r.label)}</td>
+        <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);color:#fff;font-size:14px;vertical-align:top;">${escapeHtml(r.value)}</td>
+      </tr>`,
+    )
+    .join("")
+
+  const inner = `
+    <p style="margin:0 0 20px;color:${brand.orange};font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Package quote request</p>
+    <h1 style="margin:0 0 8px;color:#fff;font-size:22px;font-weight:700;">${escapeHtml(pkg.title)}</h1>
+    <p style="margin:0 0 24px;color:${brand.cream};opacity:0.85;font-size:14px;">Submitted via the Packages page (Get started flow).</p>
+
+    <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:18px 20px;margin-bottom:22px;border:1px solid rgba(255,255,255,0.08);">
+      <p style="margin:0 0 6px;color:#fff;font-weight:600;font-size:15px;">${escapeHtml(data.name)}</p>
+      <p style="margin:0;color:${brand.orange};font-size:14px;"><a href="mailto:${escapeHtml(data.email)}" style="color:${brand.orange};text-decoration:none;">${escapeHtml(data.email)}</a></p>
+      ${data.company ? `<p style="margin:10px 0 0;color:${brand.cream};font-size:14px;opacity:0.9;">Company: ${escapeHtml(data.company)}</p>` : ""}
+    </div>
+
+    <p style="margin:0 0 10px;color:#fff;font-weight:600;font-size:15px;">Their answers</p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:20px;">${rowsHtml}</table>
+
+    ${
+      data.message
+        ? `<div style="background:rgba(254,160,47,0.08);border-radius:12px;padding:16px;border:1px solid rgba(254,160,47,0.2);">
+        <p style="margin:0 0 8px;color:${brand.orange};font-size:12px;font-weight:600;text-transform:uppercase;">Additional notes</p>
+        <p style="margin:0;color:${brand.cream};font-size:14px;line-height:1.55;">${escapeHtml(data.message)}</p>
+      </div>`
+        : ""
+    }
+  `
+
+  return emailShell(`Quote: ${pkg.title}`, inner)
+}
+
+export function buildInternalPackageQuotePlain(pkg: OfferPackage, data: Parameters<typeof buildInternalPackageQuoteHtml>[1]) {
+  const rows = buildAnswerRows(pkg.questions, data.answers)
+  return [
+    `Package quote — ${pkg.title}`,
+    "",
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    ...(data.company ? [`Company: ${data.company}`] : []),
+    ...(data.message ? [`Notes:\n${data.message}`] : []),
+    "",
+    ...rows.map((r) => `${r.label}: ${r.value}`),
+  ].join("\n")
+}
+
 export function buildConfirmationHtml(name: string, serviceTitle: string, enquiriesEmail: string) {
   const inner = `
     <p style="margin:0 0 16px;color:#fff;font-size:22px;font-weight:700;">Thank you, ${escapeHtml((name.trim().split(/\s+/)[0] || name).trim())}</p>
@@ -139,7 +202,7 @@ export function buildConfirmationHtml(name: string, serviceTitle: string, enquir
 }
 
 export function buildInternalEnquiryPlain(service: GetStartedService, data: Parameters<typeof buildInternalEnquiryHtml>[1]) {
-  const rows = buildAnswerRows(service, data.answers)
+  const rows = buildAnswerRows(service.questions, data.answers)
   return [
     `New enquiry — ${service.title}`,
     "",

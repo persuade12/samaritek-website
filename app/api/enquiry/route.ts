@@ -5,8 +5,11 @@ import {
   buildConfirmationPlain,
   buildInternalEnquiryHtml,
   buildInternalEnquiryPlain,
+  buildInternalPackageQuoteHtml,
+  buildInternalPackageQuotePlain,
 } from "@/lib/enquiry-email-html"
 import { buildEnquiryBodySchema, getServiceBySlug } from "@/lib/get-started-services"
+import { buildPackageEnquiryBodySchema, getOfferPackageBySlug } from "@/lib/offer-packages"
 
 export const runtime = "nodejs"
 
@@ -30,10 +33,81 @@ export async function POST(req: Request) {
   }
 
   const raw = body as Record<string, unknown>
-  const slug = typeof raw.serviceSlug === "string" ? raw.serviceSlug : ""
-  const service = getServiceBySlug(slug)
+  const serviceSlug = typeof raw.serviceSlug === "string" ? raw.serviceSlug : ""
+  const packageSlug = typeof raw.packageSlug === "string" ? raw.packageSlug : ""
+
+  const service = getServiceBySlug(serviceSlug)
+  const pkg = getOfferPackageBySlug(packageSlug)
+
+  if (service && pkg) {
+    return NextResponse.json({ error: "Send either serviceSlug or packageSlug, not both" }, { status: 400 })
+  }
+
+  if (pkg) {
+    const payload = { ...raw, packageSlug: pkg.slug }
+    const parsed = buildPackageEnquiryBodySchema(pkg).safeParse(payload)
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Validation failed", issues: parsed.error.flatten() }, { status: 400 })
+    }
+
+    const data = parsed.data
+    const port = Number(process.env.SMTP_PORT || "465")
+    const secure = process.env.SMTP_SECURE === "true" || port === 465
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port,
+      secure,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    })
+
+    const from = process.env.MAIL_FROM || '"SamariTek" <engine@samaritek.co.zw>'
+    const toEnquiries = process.env.MAIL_TO_ENQUIRIES || "enquiries@samaritek.co.zw"
+
+    const mailData = {
+      name: data.name,
+      email: data.email,
+      company: data.company || undefined,
+      message: data.message || undefined,
+      answers: data.answers as Record<string, string>,
+    }
+
+    const confirmTitle = `${pkg.title} (package quote)`
+    const htmlInternal = buildInternalPackageQuoteHtml(pkg, mailData)
+    const textInternal = buildInternalPackageQuotePlain(pkg, mailData)
+    const htmlConfirm = buildConfirmationHtml(data.name, confirmTitle, toEnquiries)
+    const textConfirm = buildConfirmationPlain(data.name, confirmTitle, toEnquiries)
+
+    try {
+      await transporter.sendMail({
+        from,
+        to: toEnquiries,
+        replyTo: data.email,
+        subject: `[SamariTek quote] ${pkg.title}`,
+        text: textInternal,
+        html: htmlInternal,
+      })
+
+      await transporter.sendMail({
+        from,
+        to: data.email,
+        subject: "We received your quote request — SamariTek",
+        text: textConfirm,
+        html: htmlConfirm,
+      })
+    } catch (err) {
+      console.error("[api/enquiry]", err)
+      return NextResponse.json({ error: "Could not send email. Please try again later." }, { status: 500 })
+    }
+
+    return NextResponse.json({ ok: true })
+  }
+
   if (!service) {
-    return NextResponse.json({ error: "Unknown service" }, { status: 400 })
+    return NextResponse.json({ error: "Unknown service or package" }, { status: 400 })
   }
 
   const payload = {
