@@ -2,8 +2,10 @@
 
 import type React from "react"
 
+import { ContactSubjectCombobox } from "@/components/contact-subject-combobox"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { getContactSubjectLabel } from "@/lib/contact-subjects"
 import { useState } from "react"
 
 export default function ContactPage() {
@@ -11,12 +13,25 @@ export default function ContactPage() {
     name: "",
     email: "",
     company: "",
+    subject: "",
     message: "",
   })
+  const [subjectError, setSubjectError] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("[v0] Form submitted:", formData)
+    const form = e.currentTarget
+    if (!formData.subject) {
+      setSubjectError(true)
+      return
+    }
+    setSubjectError(false)
+    if (!form.checkValidity()) {
+      form.reportValidity()
+      return
+    }
+    const subjectLabel = getContactSubjectLabel(formData.subject)
+    console.log("[v0] Form submitted:", { ...formData, subjectLabel })
     // Handle form submission
   }
 
@@ -28,11 +43,11 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-              Let's <span className="text-[#FEA02F]">Connect</span>
+              Contact <span className="text-[#FEA02F]">SamariTek</span>
             </h1>
             <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
               Whether you are scaling a product or modernising operations, we help teams across Africa turn ideas into
-              reliable software. Tell us what you are building—we will respond on{" "}
+              reliable software. Share your requirements or objectives—we will respond on{" "}
               <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
                 info@samaritek.co.zw
               </a>
@@ -79,6 +94,23 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
                     placeholder="Your company"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Subject</label>
+                  <ContactSubjectCombobox
+                    value={formData.subject}
+                    invalid={subjectError}
+                    onChange={(subject) => {
+                      setSubjectError(false)
+                      setFormData({ ...formData, subject })
+                    }}
+                  />
+                  {subjectError ? (
+                    <p className="mt-1.5 text-xs text-red-400">Please choose a subject from the list.</p>
+                  ) : (
+                    <p className="mt-1.5 text-xs text-[#657786]">Pick what this is about, or search by service name.</p>
+                  )}
                 </div>
 
                 <div>
