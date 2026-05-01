@@ -27,21 +27,6 @@ export function Footer() {
                 info@samaritek.co.zw
               </a>
             </p>
-            {/* Social links */}
-            <div className="flex gap-4">
-              {["twitter", "linkedin", "github"].map((social) => (
-                <a
-                  key={social}
-                  href={`#${social}`}
-                  className="w-10 h-10 rounded-lg bg-[#FEA02F]/10 hover:bg-[#FEA02F]/20 flex items-center justify-center text-[#FEA02F] hover:scale-110 transition-all duration-300"
-                  aria-label={social}
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" opacity="0.3" />
-                  </svg>
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
