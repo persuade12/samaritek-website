@@ -93,12 +93,12 @@ export function Footer() {
         <div className="pt-8 border-t border-[#657786]/20 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-[#657786] text-sm">© {new Date().getFullYear()} SamariTek. All rights reserved.</p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+            <Link href="/privacy" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
+            </Link>
+            <Link href="/terms" className="text-[#657786] hover:text-[#FEA02F] transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>
