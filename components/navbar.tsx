@@ -3,12 +3,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,24 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false)
+    }
+    document.addEventListener("keydown", onKeyDown)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      document.body.style.overflow = prev
+    }
+  }, [menuOpen])
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -31,13 +51,12 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-lg" : "bg-transparent"
+        scrolled || menuOpen ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center group">
+        <div className="flex items-center justify-between h-16 relative z-[70]">
+          <Link href="/" className="flex items-center group" onClick={() => setMenuOpen(false)}>
             <Image
               src="/samaritek-logo.png"
               alt="SamariTek"
@@ -48,7 +67,6 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -65,7 +83,6 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
             <Button
               asChild
@@ -76,14 +93,64 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-white p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button
+            type="button"
+            className="md:hidden rounded-lg p-2 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEA02F]/60"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
           </button>
         </div>
       </div>
+
+      {menuOpen ? (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 top-16 z-[55] bg-black/70 md:hidden"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          />
+          <div
+            id="mobile-nav-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            className="fixed left-0 right-0 top-16 z-[60] max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 bg-[#0a0a0a]/98 px-6 py-4 shadow-2xl backdrop-blur-xl md:hidden"
+          >
+            <ul className="flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
+                      pathname === link.href
+                        ? "bg-white/10 text-white"
+                        : "text-[#EBD9C8]/90 hover:bg-white/5 hover:text-white"
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 pb-2">
+              <Button
+                asChild
+                className="w-full bg-gradient-to-r from-[#FEA02F] to-[#DE6600] hover:from-[#DE6600] hover:to-[#FEA02F] text-white rounded-xl py-6 font-semibold shadow-lg shadow-[#FEA02F]/25"
+              >
+                <Link href="/get-started" onClick={() => setMenuOpen(false)}>
+                  Get Started
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </>
+      ) : null}
     </nav>
   )
 }
