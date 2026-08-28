@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { OFFER_PACKAGES } from "@/lib/offer-packages"
+import { BRAND_IMAGES } from "@/lib/brand-images"
 
 export const metadata: Metadata = {
   title: "Packages & quotes | SamariTek",
@@ -37,6 +39,24 @@ export default function PackagesPage() {
               </Link>
               .
             </p>
+          </div>
+
+          <div className="relative mb-16 h-[min(40vh,22rem)] w-full overflow-hidden rounded-3xl ring-1 ring-black/5 dark:ring-white/10">
+            <Image
+              src={BRAND_IMAGES.shopFacade}
+              alt="SamariTek logo on a modern retail shop facade"
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/20 to-transparent" />
+            <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-center p-8 md:p-10">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#FEA02F]">Retail &amp; new business</p>
+              <p className="mt-2 text-lg font-semibold text-white md:text-xl">
+                From storefront presence to online sales—we package what shops and new companies need.
+              </p>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 mb-20">

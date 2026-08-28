@@ -1,12 +1,14 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
 import { useState } from "react"
 
 import { ContactSubjectCombobox } from "@/components/contact-subject-combobox"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { contactFormSchema } from "@/lib/contact-form-schema"
+import { BRAND_IMAGES } from "@/lib/brand-images"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -213,6 +215,20 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-8">
+              <div className="relative min-h-[14rem] overflow-hidden rounded-3xl ring-1 ring-black/5 dark:ring-white/10">
+                <Image
+                  src={BRAND_IMAGES.signboard}
+                  alt="SamariTek signboard mockup on a modern building"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <p className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">
+                  Partner with a team built for African scale.
+                </p>
+              </div>
+
               <div className="bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-8">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-4">
                   <svg className="w-7 h-7 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">

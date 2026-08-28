@@ -95,8 +95,8 @@ export const AFRICA_SECTORS: AfricaSector[] = [
     ctaHref: "/get-started?service=digital-consulting",
     secondaryLabel: "See services",
     secondaryHref: "/services",
-    image: "/images/hero-mixed-team.jpg",
-    imageAlt: "African and White professionals collaborating in a modern office",
+    image: "/images/hero-modernisation.jpg",
+    imageAlt: "Diverse professionals collaborating with hands stacked in unity",
     icon: RefreshCw,
   },
   {
@@ -163,8 +163,8 @@ export const AFRICA_SECTORS: AfricaSector[] = [
     ctaHref: "/get-started",
     secondaryLabel: "Contact us",
     secondaryHref: "/contact",
-    image: "/images/hero-finance.jpg",
-    imageAlt: "Diverse African and White professionals reviewing business data together",
+    image: "/images/hero-team.jpg",
+    imageAlt: "African engineers collaborating over code in a modern workspace",
     icon: Landmark,
   },
   {
@@ -180,8 +180,8 @@ export const AFRICA_SECTORS: AfricaSector[] = [
     ctaHref: "/get-started?service=custom-solutions",
     secondaryLabel: "Contact us",
     secondaryHref: "/contact",
-    image: "/images/hero-finance.jpg",
-    imageAlt: "Professionals collaborating on digital systems suitable for healthcare operations",
+    image: "/images/hero-mixed-team.jpg",
+    imageAlt: "Diverse team collaborating on digital systems in a modern office",
     icon: HeartPulse,
   },
   {
