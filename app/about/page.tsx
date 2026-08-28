@@ -1,4 +1,11 @@
+import type { Metadata } from "next"
 import { Footer } from "@/components/footer"
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about SamariTek—software and cloud engineering for organisations across Africa, built around your mission.",
+}
 
 export default function AboutPage() {
   return (

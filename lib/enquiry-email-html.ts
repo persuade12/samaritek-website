@@ -224,3 +224,43 @@ If you need to add details, reply to this email or contact us at ${enquiriesEmai
 
 — SamariTek`
 }
+
+export function buildInternalContactHtml(data: {
+  name: string
+  email: string
+  company?: string
+  subjectLabel: string
+  message: string
+}) {
+  const inner = `
+    <p style="margin:0 0 20px;color:${brand.orange};font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Contact form</p>
+    <h1 style="margin:0 0 8px;color:#fff;font-size:22px;font-weight:700;">${escapeHtml(data.subjectLabel)}</h1>
+    <p style="margin:0 0 20px;color:${brand.cream};opacity:0.85;font-size:14px;">Submitted via the Contact page.</p>
+
+    <div style="background:rgba(255,255,255,0.04);border-radius:14px;padding:18px 20px;margin-bottom:22px;border:1px solid rgba(255,255,255,0.08);">
+      <p style="margin:0 0 6px;color:#fff;font-weight:600;font-size:15px;">${escapeHtml(data.name)}</p>
+      <p style="margin:0;color:${brand.orange};font-size:14px;"><a href="mailto:${escapeHtml(data.email)}" style="color:${brand.orange};text-decoration:none;">${escapeHtml(data.email)}</a></p>
+      ${data.company ? `<p style="margin:10px 0 0;color:${brand.cream};font-size:14px;opacity:0.9;">Company: ${escapeHtml(data.company)}</p>` : ""}
+    </div>
+
+    <div style="background:rgba(254,160,47,0.08);border-radius:12px;padding:16px;border:1px solid rgba(254,160,47,0.2);">
+      <p style="margin:0 0 8px;color:${brand.orange};font-size:12px;font-weight:600;text-transform:uppercase;">Message</p>
+      <p style="margin:0;color:${brand.cream};font-size:14px;line-height:1.55;">${escapeHtml(data.message)}</p>
+    </div>
+  `
+
+  return emailShell(`Contact: ${data.subjectLabel}`, inner)
+}
+
+export function buildInternalContactPlain(data: Parameters<typeof buildInternalContactHtml>[0]) {
+  return [
+    `Contact form — ${data.subjectLabel}`,
+    "",
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    ...(data.company ? [`Company: ${data.company}`] : []),
+    "",
+    "Message:",
+    data.message,
+  ].join("\n")
+}

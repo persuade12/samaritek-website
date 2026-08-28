@@ -1,6 +1,13 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = {
+  title: "Work",
+  description:
+    "How SamariTek partners with teams across Africa—from discovery to delivery—on software and cloud initiatives.",
+}
 
 const phases = [
   {

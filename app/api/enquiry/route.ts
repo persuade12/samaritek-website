@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import nodemailer from "nodemailer"
 import {
   buildConfirmationHtml,
   buildConfirmationPlain,
@@ -9,12 +8,17 @@ import {
   buildInternalPackageQuotePlain,
 } from "@/lib/enquiry-email-html"
 import { buildEnquiryBodySchema, getServiceBySlug } from "@/lib/get-started-services"
+import { enforceMailRateLimit } from "@/lib/mail-rate-limit"
 import { buildPackageEnquiryBodySchema, getOfferPackageBySlug } from "@/lib/offer-packages"
+import { createSmtpTransporter, mailFrom, mailToEnquiries, smtpConfigured } from "@/lib/smtp-transporter"
 
 export const runtime = "nodejs"
 
 export async function POST(req: Request) {
-  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+  const limited = enforceMailRateLimit(req, "enquiry")
+  if (limited) return limited
+
+  if (!smtpConfigured()) {
     return NextResponse.json(
       { error: "Email is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS on the server." },
       { status: 503 },
@@ -43,6 +47,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Send either serviceSlug or packageSlug, not both" }, { status: 400 })
   }
 
+  const transporter = createSmtpTransporter()
+  const from = mailFrom()
+  const toEnquiries = mailToEnquiries()
+
   if (pkg) {
     const payload = { ...raw, packageSlug: pkg.slug }
     const parsed = buildPackageEnquiryBodySchema(pkg).safeParse(payload)
@@ -51,21 +59,6 @@ export async function POST(req: Request) {
     }
 
     const data = parsed.data
-    const port = Number(process.env.SMTP_PORT || "465")
-    const secure = process.env.SMTP_SECURE === "true" || port === 465
-
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port,
-      secure,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
-
-    const from = process.env.MAIL_FROM || '"SamariTek" <engine@samaritek.co.zw>'
-    const toEnquiries = process.env.MAIL_TO_ENQUIRIES || "enquiries@samaritek.co.zw"
 
     const mailData = {
       name: data.name,
@@ -121,21 +114,6 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data
-  const port = Number(process.env.SMTP_PORT || "465")
-  const secure = process.env.SMTP_SECURE === "true" || port === 465
-
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port,
-    secure,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  })
-
-  const from = process.env.MAIL_FROM || '"SamariTek" <engine@samaritek.co.zw>'
-  const toEnquiries = process.env.MAIL_TO_ENQUIRIES || "enquiries@samaritek.co.zw"
 
   const mailData = {
     name: data.name,

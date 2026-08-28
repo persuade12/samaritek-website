@@ -1,12 +1,12 @@
 "use client"
 
 import type React from "react"
+import { useState } from "react"
 
 import { ContactSubjectCombobox } from "@/components/contact-subject-combobox"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { getContactSubjectLabel } from "@/lib/contact-subjects"
-import { useState } from "react"
+import { contactFormSchema } from "@/lib/contact-form-schema"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -16,9 +16,13 @@ export default function ContactPage() {
     subject: "",
     message: "",
   })
+  const [honeypot, setHoneypot] = useState("")
   const [subjectError, setSubjectError] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
     if (!formData.subject) {
@@ -30,9 +34,52 @@ export default function ContactPage() {
       form.reportValidity()
       return
     }
-    const subjectLabel = getContactSubjectLabel(formData.subject)
-    console.log("[v0] Form submitted:", { ...formData, subjectLabel })
-    // Handle form submission
+
+    const payload = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      company: formData.company.trim(),
+      subject: formData.subject,
+      message: formData.message.trim(),
+      _trap: honeypot,
+    }
+
+    const parsed = contactFormSchema.safeParse(payload)
+    if (!parsed.success) {
+      const msg = parsed.error.issues[0]?.message || "Please check the form and try again."
+      setSubmitError(msg)
+      return
+    }
+
+    setSubmitError(null)
+    setLoading(true)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      })
+      const json = (await res.json().catch(() => ({}))) as { error?: string; retryAfterSec?: number }
+      if (res.status === 429) {
+        setSubmitError(
+          json.retryAfterSec
+            ? `Too many attempts. Please wait about ${json.retryAfterSec} seconds and try again.`
+            : json.error || "Too many attempts. Please try again later.",
+        )
+        return
+      }
+      if (!res.ok) {
+        setSubmitError(json.error || "Something went wrong. Please try again.")
+        return
+      }
+      setSuccess(true)
+      setFormData({ name: "", email: "", company: "", subject: "", message: "" })
+      setHoneypot("")
+    } catch {
+      setSubmitError("Network error. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -56,86 +103,115 @@ export default function ContactPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10">
               <h2 className="text-3xl font-bold text-white mb-8">Send us a message</h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Name</label>
+              {success ? (
+                <div className="rounded-2xl border border-[#FEA02F]/30 bg-[#FEA02F]/5 p-8 text-center space-y-4">
+                  <p className="text-lg font-semibold text-white">Message sent</p>
+                  <p className="text-[#EBD9C8]/90 text-sm leading-relaxed">
+                    Thank you. We have emailed you a short confirmation. Our team will read your message and reply as
+                    soon as we can.
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="border-white/20 text-white rounded-xl"
+                    onClick={() => setSuccess(false)}
+                  >
+                    Send another message
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6 relative">
                   <input
                     type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
-                    placeholder="Your name"
-                    required
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    className="absolute -left-[9999px] h-px w-px opacity-0"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden
                   />
-                </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Email</label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
-                    placeholder="your@email.com"
-                    required
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Name</label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Company</label>
-                  <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
-                    placeholder="Your company"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Email</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Subject</label>
-                  <ContactSubjectCombobox
-                    value={formData.subject}
-                    invalid={subjectError}
-                    onChange={(subject) => {
-                      setSubjectError(false)
-                      setFormData({ ...formData, subject })
-                    }}
-                  />
-                  {subjectError ? (
-                    <p className="mt-1.5 text-xs text-red-400">Please choose a subject from the list.</p>
-                  ) : (
-                    <p className="mt-1.5 text-xs text-[#657786]">Pick what this is about, or search by service name.</p>
-                  )}
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Company</label>
+                    <input
+                      type="text"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      placeholder="Your company"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Message</label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors resize-none"
-                    placeholder="Tell us about your project..."
-                    required
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Subject</label>
+                    <ContactSubjectCombobox
+                      value={formData.subject}
+                      invalid={subjectError}
+                      onChange={(subject) => {
+                        setSubjectError(false)
+                        setFormData({ ...formData, subject })
+                      }}
+                    />
+                    {subjectError ? (
+                      <p className="mt-1.5 text-xs text-red-400">Please choose a subject from the list.</p>
+                    ) : (
+                      <p className="mt-1.5 text-xs text-[#657786]">Pick what this is about, or search by service name.</p>
+                    )}
+                  </div>
 
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-[#FEA02F] to-[#DE6600] hover:from-[#DE6600] hover:to-[#FEA02F] text-white py-6 text-lg font-semibold rounded-xl shadow-lg shadow-[#FEA02F]/30 hover:shadow-[#FEA02F]/50 transition-all duration-300"
-                >
-                  Send Message
-                </Button>
-              </form>
+                  <div>
+                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Message</label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={5}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors resize-none"
+                      placeholder="Tell us about your project..."
+                      required
+                    />
+                  </div>
+
+                  {submitError ? <p className="text-sm text-red-400">{submitError}</p> : null}
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={loading}
+                    className="w-full bg-gradient-to-r from-[#FEA02F] to-[#DE6600] hover:from-[#DE6600] hover:to-[#FEA02F] text-white py-6 text-lg font-semibold rounded-xl shadow-lg shadow-[#FEA02F]/30 hover:shadow-[#FEA02F]/50 transition-all duration-300 disabled:opacity-60"
+                  >
+                    {loading ? "Sending…" : "Send Message"}
+                  </Button>
+                </form>
+              )}
             </div>
 
-            {/* Contact Info */}
             <div className="space-y-8">
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-4">

@@ -1,6 +1,13 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Custom software, web platforms, mobile solutions, e-commerce, cloud infrastructure, and digital transformation from SamariTek.",
+}
 
 export default function ServicesPage() {
   const services = [
