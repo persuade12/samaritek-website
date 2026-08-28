@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { BrainCircuit, Cloud, Code2, Smartphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef } from "react"
 
 const heroCapabilities = [
   {
@@ -29,76 +28,9 @@ const heroCapabilities = [
 ] as const
 
 export function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
-    const particles: Array<{
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      color: string
-    }> = []
-
-    const colors = ["#FEA02F", "#DE6600", "#657786"]
-
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: (Math.random() - 0.5) * 0.3,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      })
-    }
-
-    function animate() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      particles.forEach((particle) => {
-        particle.x += particle.speedX
-        particle.y += particle.speedY
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1
-
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = particle.color
-        ctx.globalAlpha = 0.4
-        ctx.fill()
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-background pt-16">
-      <canvas
-        ref={canvasRef}
+    <section className="relative flex min-h-svh items-center justify-center overflow-hidden bg-background pt-28 pb-16">
+      <div
         className="absolute inset-0 w-full h-full"
         style={{ background: "radial-gradient(ellipse at top, var(--hero-from) 0%, var(--hero-to) 100%)" }}
       />
@@ -107,8 +39,8 @@ export function HeroSection() {
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#FEA02F]/5 via-transparent to-transparent" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-[1.1] text-balance tracking-tight">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center">
+        <h2 className="mb-4 text-3xl font-bold leading-[1.15] tracking-tight text-balance text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
           Engineering the
           <br />
           <span className="bg-gradient-to-r from-[#FEA02F] via-[#DE6600] to-[#FEA02F] bg-clip-text text-transparent animate-gradient">
@@ -116,22 +48,22 @@ export function HeroSection() {
           </span>
         </h2>
 
-        <p className="text-base md:text-lg lg:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed text-pretty font-light tracking-wide">
+        <p className="mx-auto mb-8 max-w-3xl text-pretty text-base font-light leading-relaxed tracking-wide text-muted-foreground md:text-lg lg:text-xl">
           Custom software, web, and cloud for teams across Africa—crafted with precision.
           <br className="hidden md:block" />
           Built to transform organisations. Designed for real-world scale.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+        <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button
             asChild
             size="lg"
-            className="bg-foreground hover:bg-foreground/90 text-background px-10 py-6 text-base font-semibold rounded-full shadow-2xl shadow-foreground/15 hover:shadow-foreground/25 hover:scale-105 transition-all duration-500 group"
+            className="rounded-full bg-foreground px-10 py-6 text-base font-semibold text-background shadow-2xl shadow-foreground/15 transition-all duration-500 hover:scale-105 hover:bg-foreground/90 hover:shadow-foreground/25 group"
           >
             <Link href="/get-started" className="inline-flex items-center">
               Start Your Project
               <svg
-                className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -144,29 +76,29 @@ export function HeroSection() {
             asChild
             size="lg"
             variant="ghost"
-            className="text-foreground hover:text-[#FEA02F] px-10 py-6 text-base font-semibold rounded-full border-2 border-border hover:border-[#FEA02F]/50 hover:bg-[#FEA02F]/5 hover:scale-105 transition-all duration-500"
+            className="rounded-full border-2 border-border px-10 py-6 text-base font-semibold text-foreground transition-all duration-500 hover:scale-105 hover:border-[#FEA02F]/50 hover:bg-[#FEA02F]/5 hover:text-[#FEA02F]"
           >
             <Link href="/work">How we work</Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+        <div className="mx-auto grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
           {heroCapabilities.map(({ label, href, Icon }) => (
             <Link
               key={href}
               href={href}
-              className="flex flex-col items-center gap-2 group cursor-pointer no-underline"
+              className="group flex cursor-pointer flex-col items-center gap-2 no-underline"
             >
-              <div className="w-12 h-12 rounded-2xl bg-surface backdrop-blur-sm border border-surface-border flex items-center justify-center group-hover:bg-[#FEA02F]/10 group-hover:border-[#FEA02F]/30 transition-all duration-300">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-border bg-surface backdrop-blur-sm transition-all duration-300 group-hover:border-[#FEA02F]/30 group-hover:bg-[#FEA02F]/10">
                 <Icon className="h-6 w-6 text-[#FEA02F] transition-transform group-hover:scale-110" aria-hidden />
               </div>
-              <span className="text-xs text-muted-foreground font-medium text-center leading-snug">{label}</span>
+              <span className="text-center text-xs font-medium leading-snug text-muted-foreground">{label}</span>
             </Link>
           ))}
         </div>
 
         <div className="mt-8">
-          <p className="text-xs text-muted-foreground font-light tracking-wider">ENGINEERING FOR AFRICAN SCALE</p>
+          <p className="text-xs font-light tracking-wider text-muted-foreground">ENGINEERING FOR AFRICAN SCALE</p>
         </div>
 
         <div className="mt-6">
@@ -179,7 +111,7 @@ export function HeroSection() {
             aria-label="Scroll to Our Solutions"
           >
             <svg
-              className="w-5 h-5"
+              className="h-5 w-5"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
