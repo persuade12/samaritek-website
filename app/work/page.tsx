@@ -55,14 +55,14 @@ export default function WorkPage() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch mb-20 md:mb-24 max-w-6xl mx-auto">
             <div className="relative min-h-[16rem] overflow-hidden rounded-3xl lg:min-h-full">
               <Image
-                src="/images/work-delivery.jpg"
-                alt="Analytics and delivery dashboards used to guide product decisions"
+                src="/images/samaritek-rollup-banner.jpg"
+                alt="SamariTek roll-up banner in a modern office space"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover object-center"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent" />
             </div>
 
             <div className="rounded-3xl border border-surface-border bg-surface backdrop-blur-sm p-8 md:p-10 flex flex-col justify-center">

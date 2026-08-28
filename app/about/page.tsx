@@ -28,11 +28,11 @@ export default function AboutPage() {
 
       <section className="relative mb-20 md:mb-28 h-[min(52vh,28rem)] w-full overflow-hidden">
         <Image
-          src="/images/about-workspace.jpg"
-          alt="Bright modern workspace where teams design and build software"
+          src="/images/samaritek-banner.jpg"
+          alt="SamariTek branded banner at our outdoor workspace"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
