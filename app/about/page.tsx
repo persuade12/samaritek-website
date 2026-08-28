@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
@@ -10,11 +11,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
+      <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="text-center mb-14 md:mb-16">
             <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
               About <span className="text-[#FEA02F]">SamariTek</span>
             </h1>
@@ -23,8 +23,23 @@ export default function AboutPage() {
               Africa—built for clarity, performance, and lasting business impact.
             </p>
           </div>
+        </div>
+      </section>
 
-          {/* Mission & Vision */}
+      <section className="relative mb-20 md:mb-28 h-[min(52vh,28rem)] w-full overflow-hidden">
+        <Image
+          src="/images/about-workspace.jpg"
+          alt="Bright modern workspace where teams design and build software"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      </section>
+
+      <section className="pb-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 mb-32">
             <div className="bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-12 hover:bg-surface-hover transition-all duration-300">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-6">
@@ -64,8 +79,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Values */}
-          <div className="mb-32">
+          <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center mb-16">Our Core Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -40,7 +41,7 @@ export default function WorkPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 md:mb-20">
+          <div className="text-center mb-14 md:mb-16">
             <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight text-balance">
               Our <span className="text-[#FEA02F]">Work</span>
             </h1>
@@ -51,8 +52,20 @@ export default function WorkPage() {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto mb-20 md:mb-24">
-            <div className="rounded-3xl border border-surface-border bg-surface backdrop-blur-sm p-8 md:p-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch mb-20 md:mb-24 max-w-6xl mx-auto">
+            <div className="relative min-h-[16rem] overflow-hidden rounded-3xl lg:min-h-full">
+              <Image
+                src="/images/work-delivery.jpg"
+                alt="Analytics and delivery dashboards used to guide product decisions"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
+            </div>
+
+            <div className="rounded-3xl border border-surface-border bg-surface backdrop-blur-sm p-8 md:p-10 flex flex-col justify-center">
               <h2 className="text-xl font-semibold text-foreground mb-4">How we engage</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Every engagement is different. We tailor scope, stack, and cadence to your team—whether you need a
@@ -77,7 +90,7 @@ export default function WorkPage() {
               {phases.map((phase, i) => (
                 <div
                   key={phase.title}
-                  className="relative rounded-2xl border border-surface-border bg-gradient-to-b from-white/[0.06] to-transparent p-8"
+                  className="relative rounded-2xl border border-surface-border bg-card/60 p-8"
                 >
                   <span className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#FEA02F]/15 text-sm font-bold text-[#FEA02F]">
                     {i + 1}
@@ -90,7 +103,7 @@ export default function WorkPage() {
           </div>
 
           <div className="max-w-2xl mx-auto text-center pb-8">
-            <p className="text-[#657786] text-sm mb-6">
+            <p className="text-muted-foreground text-sm mb-6">
               Tell us what you’re building—we’ll answer with a straight take on fit, timeline, and next steps.
             </p>
             <Button

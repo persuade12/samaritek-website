@@ -2,11 +2,12 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { AFRICA_SECTORS } from "@/lib/africa-sectors"
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Custom software, web platforms, mobile solutions, e-commerce, cloud infrastructure, and digital transformation from SamariTek.",
+    "Software and digital systems for African modernisation, agriculture, mining, education, tech, and enterprise—from SamariTek.",
 }
 
 export default function ServicesPage() {
@@ -105,14 +106,37 @@ export default function ServicesPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
+          <div className="text-center mb-14 md:mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-5 tracking-tight">
               Our <span className="text-[#FEA02F]">Services</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              End-to-end technology for teams across Africa—from strategy and architecture to shipped software you can
-              run, measure, and grow.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Technology for Africa&apos;s core sectors—modernisation, agriculture, mining, education, tech, and
+              enterprise—delivered as software you can run, measure, and grow.
             </p>
+          </div>
+
+          <div className="mb-16 md:mb-20">
+            <h2 className="text-center text-sm font-semibold uppercase tracking-[0.16em] text-[#FEA02F] mb-6">
+              Priority sectors
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+              {AFRICA_SECTORS.map((sector) => {
+                const Icon = sector.icon
+                return (
+                  <Link
+                    key={sector.id}
+                    href={sector.ctaHref}
+                    className="group flex flex-col items-center gap-2 rounded-2xl border border-surface-border bg-surface px-3 py-4 text-center transition-colors hover:border-[#FEA02F]/40 hover:bg-surface-hover"
+                  >
+                    <Icon className="h-5 w-5 text-[#FEA02F]" aria-hidden />
+                    <span className="text-xs font-semibold text-foreground group-hover:text-[#FEA02F]">
+                      {sector.shortTitle}
+                    </span>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">

@@ -2,58 +2,7 @@
 
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import { Code, Cloud, Globe, Link as LinkIcon, CreditCard, Wrench, MessageSquare, ClipboardList } from "lucide-react"
-
-const services = [
-  {
-    icon: Code,
-    title: "Software Development",
-    description: "Custom applications built for your unique needs, from concept to deployment.",
-    getStartedSlug: "software-development",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud Solutions & Hosting",
-    description: "Scalable, secure infrastructure that grows with your business.",
-    getStartedSlug: "cloud-solutions",
-  },
-  {
-    icon: Globe,
-    title: "Web Development",
-    description: "Beautiful, high-performance websites that captivate and convert.",
-    getStartedSlug: "web-applications",
-  },
-  {
-    icon: LinkIcon,
-    title: "Integrations",
-    description: "Seamless system connections that make your tools work together.",
-    getStartedSlug: "integrations",
-  },
-  {
-    icon: CreditCard,
-    title: "Payment Integrations",
-    description: "Secure, smooth transaction experiences your customers will trust.",
-    getStartedSlug: "payment-integrations",
-  },
-  {
-    icon: Wrench,
-    title: "Custom Solutions",
-    description: "Tailored technology for unique challenges and opportunities.",
-    getStartedSlug: "custom-solutions",
-  },
-  {
-    icon: MessageSquare,
-    title: "Consultancy",
-    description: "Expert guidance for your tech journey, every step of the way.",
-    getStartedSlug: "digital-consulting",
-  },
-  {
-    icon: ClipboardList,
-    title: "Project Management",
-    description: "Professional delivery, every time. Your success is our mission.",
-    getStartedSlug: "project-management",
-  },
-]
+import { AFRICA_SECTORS } from "@/lib/africa-sectors"
 
 export function ServicesGrid() {
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
@@ -84,66 +33,56 @@ export function ServicesGrid() {
   }, [])
 
   return (
-    <section id="our-solutions" className="scroll-mt-20 py-32 px-6 bg-background relative">
-      {/* Section header */}
-      <div className="max-w-7xl mx-auto mb-20 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6 text-balance">
-          Our <span className="text-[#FEA02F]">Solutions</span>
+    <section id="our-solutions" className="scroll-mt-20 relative bg-background px-6 py-24 md:py-28">
+      <div className="mx-auto mb-14 max-w-7xl text-center md:mb-16">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FEA02F]">Built for Africa</p>
+        <h2 className="mb-4 text-balance text-4xl font-bold text-foreground md:text-5xl">
+          Solutions for Africa&apos;s <span className="text-[#FEA02F]">core sectors</span>
         </h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Technology services for organisations across Africa—from discovery to deployment and beyond.
+        <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Modernisation, agriculture, mining, education, tech, and enterprise—software shaped around how organisations
+          across the continent actually operate.
         </p>
       </div>
 
-      {/* Services grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 items-stretch md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map((service, index) => {
-          const Icon = service.icon
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {AFRICA_SECTORS.map((sector, index) => {
+          const Icon = sector.icon
           return (
             <div
-              key={index}
+              key={sector.id}
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`h-full transition-all duration-500 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className={`h-full transition-all duration-500 ${
+                visibleCards.has(index) ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <Link
-                href={`/get-started?service=${encodeURIComponent(service.getStartedSlug)}`}
-                className="group relative flex h-full min-h-[17rem] flex-col rounded-2xl border border-surface-border bg-surface p-8 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:bg-surface-hover cursor-pointer shadow-sm dark:shadow-none"
+                href={sector.ctaHref}
+                className="group relative flex h-full min-h-[15rem] cursor-pointer flex-col rounded-2xl border border-surface-border bg-surface p-7 shadow-sm backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:bg-surface-hover dark:shadow-none"
               >
-              {/* Hover glow effect */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#DE6600]/20 to-transparent pointer-events-none" />
+                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[#DE6600]/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              {/* Icon */}
-              <div className="relative mb-6 shrink-0">
-                <div className="w-14 h-14 rounded-xl bg-[#FEA02F]/10 flex items-center justify-center group-hover:bg-[#FEA02F]/20 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-[#FEA02F] group-hover:scale-110 transition-transform duration-300" />
+                <div className="relative mb-5 shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FEA02F]/10 transition-colors duration-300 group-hover:bg-[#FEA02F]/20">
+                    <Icon className="h-6 w-6 text-[#FEA02F] transition-transform duration-300 group-hover:scale-110" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Content */}
-              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-[#FEA02F] transition-colors duration-300 shrink-0">
-                {service.title}
-              </h3>
-              <p className="flex-1 text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                <h3 className="relative mb-2 shrink-0 text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-[#FEA02F]">
+                  {sector.title}
+                </h3>
+                <p className="relative mb-4 flex-1 leading-relaxed text-muted-foreground">{sector.description}</p>
 
-              {/* Learn more link */}
-              <div className="mt-auto flex shrink-0 items-center gap-2 text-[#FEA02F] font-semibold group-hover:gap-3 transition-all duration-300">
-                <span>Get started</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M9 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </Link>
+                <div className="relative mt-auto flex shrink-0 items-center gap-2 font-semibold text-[#FEA02F] transition-all duration-300 group-hover:gap-3">
+                  <span>Get started</span>
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </Link>
             </div>
           )
         })}
