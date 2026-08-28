@@ -3,18 +3,37 @@ import Image from "next/image"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
 import { OFFER_PACKAGES } from "@/lib/offer-packages"
 import { BRAND_IMAGES } from "@/lib/brand-images"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Packages & quotes | SamariTek",
+export const metadata: Metadata = createMetadata({
+  title: "Packages & quotes",
   description:
-    "Bundled offerings for new businesses and retailers—online presence, e‑commerce, and digital growth. Request a tailored quote.",
-}
+    "Bundled digital packages for new businesses and retailers—website, e-commerce, branding, and growth. Request a tailored quote from SamariTek.",
+  path: "/packages",
+  keywords: [
+    "business website packages",
+    "e-commerce packages Zimbabwe",
+    "digital marketing packages",
+    "startup website quote",
+  ],
+  ogImage: BRAND_IMAGES.shopFacade,
+  ogImageAlt: "SamariTek retail shop facade branding mockup",
+})
 
 export default function PackagesPage() {
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/packages",
+          title: "Packages & quotes | SamariTek",
+          description:
+            "Bundled digital packages for new businesses and retailers—website, e-commerce, branding, and growth. Request a tailored quote from SamariTek.",
+        })}
+      />
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 

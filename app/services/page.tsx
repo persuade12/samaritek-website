@@ -2,13 +2,23 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { JsonLd, professionalServiceJsonLd, webPageJsonLd } from "@/components/json-ld"
 import { AFRICA_SECTORS } from "@/lib/africa-sectors"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Services",
   description:
-    "Software and digital systems for African modernisation, agriculture, mining, education, tech, and enterprise—from SamariTek.",
-}
+    "Custom software, web and mobile apps, cloud infrastructure, AI, IoT, and integrations for organisations across Africa—delivered by SamariTek.",
+  path: "/services",
+  keywords: [
+    "web development services",
+    "mobile app development",
+    "cloud infrastructure Africa",
+    "AI development",
+    "IoT solutions Africa",
+  ],
+})
 
 export default function ServicesPage() {
   const services = [
@@ -102,6 +112,17 @@ export default function ServicesPage() {
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={[
+          webPageJsonLd({
+            path: "/services",
+            title: "Services | SamariTek",
+            description:
+              "Custom software, web and mobile apps, cloud infrastructure, AI, IoT, and integrations for organisations across Africa—delivered by SamariTek.",
+          }),
+          professionalServiceJsonLd(),
+        ]}
+      />
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 

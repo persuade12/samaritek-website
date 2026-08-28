@@ -3,12 +3,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
+import { BRAND_IMAGES } from "@/lib/brand-images"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Work",
+export const metadata: Metadata = createMetadata({
+  title: "Our work",
   description:
-    "How SamariTek partners with teams across Africa—from discovery to delivery—on software and cloud initiatives.",
-}
+    "How SamariTek partners with teams across Africa—from discovery and design to launch and ongoing support on software and cloud initiatives.",
+  path: "/work",
+  keywords: ["software project delivery", "digital transformation process", "technology partner Africa"],
+  ogImage: BRAND_IMAGES.rollupBanner,
+  ogImageAlt: "SamariTek rollup banner at an event",
+})
 
 const phases = [
   {
@@ -37,6 +44,14 @@ const focusAreas = [
 export default function WorkPage() {
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/work",
+          title: "Our work | SamariTek",
+          description:
+            "How SamariTek partners with teams across Africa—from discovery and design to launch and ongoing support on software and cloud initiatives.",
+        })}
+      />
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 

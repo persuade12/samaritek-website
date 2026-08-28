@@ -1,16 +1,28 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | SamariTek",
+export const metadata: Metadata = createMetadata({
+  title: "Privacy Policy",
   description:
-    "How SamariTek collects, uses, and protects personal information when you use our website and services.",
-}
+    "How SamariTek collects, uses, stores, and protects personal information when you use samaritek.co.zw and our services.",
+  path: "/privacy",
+  keywords: ["privacy policy", "data protection SamariTek"],
+})
 
 export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/privacy",
+          title: "Privacy Policy | SamariTek",
+          description:
+            "How SamariTek collects, uses, stores, and protects personal information when you use samaritek.co.zw and our services.",
+        })}
+      />
       <article className="relative pt-28 pb-20 px-6">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 mx-auto max-w-3xl">

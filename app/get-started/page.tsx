@@ -1,12 +1,16 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
+import { createMetadata } from "@/lib/seo"
 import { GetStartedWizard } from "./get-started-wizard"
 
-export const metadata: Metadata = {
-  title: "Get started | SamariTek",
+export const metadata: Metadata = createMetadata({
+  title: "Get started",
   description:
-    "Request a quote for a package or tell us which service you need—we follow up by email.",
-}
+    "Request a quote for a SamariTek package or service—answer a few questions and our team will follow up by email with next steps.",
+  path: "/get-started",
+  keywords: ["request software quote", "get started SamariTek", "project enquiry form"],
+})
 
 function WizardFallback() {
   return (
@@ -18,8 +22,18 @@ function WizardFallback() {
 
 export default function GetStartedPage() {
   return (
-    <Suspense fallback={<WizardFallback />}>
-      <GetStartedWizard />
-    </Suspense>
+    <>
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/get-started",
+          title: "Get started | SamariTek",
+          description:
+            "Request a quote for a SamariTek package or service—answer a few questions and our team will follow up by email with next steps.",
+        })}
+      />
+      <Suspense fallback={<WizardFallback />}>
+        <GetStartedWizard />
+      </Suspense>
+    </>
   )
 }

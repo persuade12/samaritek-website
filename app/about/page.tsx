@@ -1,16 +1,28 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import { Footer } from "@/components/footer"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "About",
   description:
-    "Learn about SamariTek—software and cloud engineering for organisations across Africa, built around your mission.",
-}
+    "Learn about SamariTek—software and cloud engineering for organisations across Africa, built around your mission and long-term impact.",
+  path: "/about",
+  keywords: ["about SamariTek", "technology company Africa", "software engineering team"],
+})
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/about",
+          title: "About | SamariTek",
+          description:
+            "Learn about SamariTek—software and cloud engineering for organisations across Africa, built around your mission and long-term impact.",
+        })}
+      />
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6">

@@ -1,16 +1,28 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Footer } from "@/components/footer"
+import { JsonLd, webPageJsonLd } from "@/components/json-ld"
+import { createMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Terms of Service | SamariTek",
+export const metadata: Metadata = createMetadata({
+  title: "Terms of Service",
   description:
-    "Terms governing your use of the SamariTek website and general engagement with our services and communications.",
-}
+    "Terms governing your use of samaritek.co.zw and your engagement with SamariTek services, communications, and project work.",
+  path: "/terms",
+  keywords: ["terms of service", "website terms SamariTek"],
+})
 
 export default function TermsOfServicePage() {
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd
+        data={webPageJsonLd({
+          path: "/terms",
+          title: "Terms of Service | SamariTek",
+          description:
+            "Terms governing your use of samaritek.co.zw and your engagement with SamariTek services, communications, and project work.",
+        })}
+      />
       <article className="relative pt-28 pb-20 px-6">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 mx-auto max-w-3xl">

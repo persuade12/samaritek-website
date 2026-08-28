@@ -1,15 +1,12 @@
 import type { MetadataRoute } from "next"
-
-function siteBase(): string {
-  return (process.env.NEXT_PUBLIC_SITE_URL || "https://samaritek.co.zw").replace(/\/$/, "")
-}
+import { siteUrl } from "@/lib/site"
 
 type Freq = NonNullable<MetadataRoute.Sitemap[0]["changeFrequency"]>
 
 const paths: { path: string; changeFrequency: Freq; priority: number }[] = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/services", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/services", changeFrequency: "monthly", priority: 0.85 },
   { path: "/packages", changeFrequency: "monthly", priority: 0.85 },
   { path: "/work", changeFrequency: "monthly", priority: 0.7 },
   { path: "/get-started", changeFrequency: "monthly", priority: 0.9 },
@@ -19,7 +16,7 @@ const paths: { path: string; changeFrequency: Freq; priority: number }[] = [
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteBase()
+  const base = siteUrl()
   const now = new Date()
   return paths.map(({ path, changeFrequency, priority }) => ({
     url: `${base}${path}`,
