@@ -37,8 +37,8 @@ export function ContactSubjectCombobox({ value, onChange, disabled, invalid }: P
           aria-invalid={invalid || undefined}
           disabled={disabled}
           className={cn(
-            "w-full min-h-12 justify-between rounded-xl border border-white/20 bg-white/5 px-4 py-3 font-normal text-left text-white hover:bg-white/10 hover:text-white",
-            !selected && "text-[#EBD9C8]/60",
+            "w-full min-h-12 justify-between rounded-xl border border-border bg-surface px-4 py-3 font-normal text-left text-foreground hover:bg-surface-hover hover:text-foreground",
+            !selected && "text-muted-foreground",
             invalid && "border-red-400/70 ring-1 ring-red-400/30",
           )}
         >
@@ -47,16 +47,16 @@ export function ContactSubjectCombobox({ value, onChange, disabled, invalid }: P
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="z-[100] w-[var(--radix-popover-trigger-width)] border border-white/15 bg-[#141414] p-0 text-white shadow-xl"
+        className="z-[100] w-[var(--radix-popover-trigger-width)] border border-border bg-popover p-0 text-popover-foreground shadow-xl"
         align="start"
       >
-        <Command className="bg-[#141414] text-white [&_[cmdk-input-wrapper]]:border-white/10 [&_[cmdk-input-wrapper]]:border-b">
+        <Command className="bg-popover text-popover-foreground [&_[cmdk-input-wrapper]]:border-border [&_[cmdk-input-wrapper]]:border-b">
           <CommandInput
             placeholder="Type to search services…"
-            className="h-11 border-0 bg-transparent text-white placeholder:text-[#657786]"
+            className="h-11 border-0 bg-transparent text-foreground placeholder:text-muted-foreground"
           />
           <CommandList className="max-h-[280px]">
-            <CommandEmpty className="py-6 text-sm text-[#657786]">No subject matches that search.</CommandEmpty>
+            <CommandEmpty className="py-6 text-sm text-muted-foreground">No subject matches that search.</CommandEmpty>
             <CommandGroup className="p-1">
               {CONTACT_SUBJECT_OPTIONS.map((opt) => (
                 <CommandItem
@@ -66,7 +66,7 @@ export function ContactSubjectCombobox({ value, onChange, disabled, invalid }: P
                     onChange(opt.value)
                     setOpen(false)
                   }}
-                  className="cursor-pointer rounded-lg text-[#EBD9C8] aria-selected:bg-[#FEA02F]/15 aria-selected:text-white data-[selected=true]:bg-[#FEA02F]/20 data-[selected=true]:text-white"
+                  className="cursor-pointer rounded-lg text-muted-foreground aria-selected:bg-[#FEA02F]/15 aria-selected:text-foreground data-[selected=true]:bg-[#FEA02F]/20 data-[selected=true]:text-foreground"
                 >
                   <Check className={cn("mr-2 h-4 w-4 shrink-0 text-[#FEA02F]", value === opt.value ? "opacity-100" : "opacity-0")} />
                   {opt.label}

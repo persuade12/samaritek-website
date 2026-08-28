@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 export default function PackagesPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 tracking-tight">
               Packages & <span className="text-[#FEA02F]">quotes</span>
             </h1>
-            <p className="text-xl text-[#EBD9C8]/80 leading-relaxed">
-              Fixed bundles do not fit every business—so these are <strong className="text-white font-semibold">scoped packages</strong>{" "}
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Fixed bundles do not fit every business—so these are <strong className="text-foreground font-semibold">scoped packages</strong>{" "}
               we quote after a short questionnaire. Ideal if you have just registered a company, run a shop, or
               already have a site and need structured growth work.
             </p>
@@ -43,21 +43,21 @@ export default function PackagesPage() {
             {OFFER_PACKAGES.map((pkg) => (
               <article
                 key={pkg.slug}
-                className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-8 hover:border-[#FEA02F]/35 hover:bg-white/[0.06] transition-all duration-300"
+                className="flex flex-col rounded-3xl border border-surface-border bg-surface p-8 hover:border-[#FEA02F]/35 hover:bg-surface-hover transition-all duration-300"
               >
                 <div className="mb-5">
                   <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#FEA02F]/90 mb-2">
                     Bundle
                   </span>
-                  <h2 className="text-2xl font-bold text-white leading-tight">{pkg.title}</h2>
-                  <p className="mt-2 text-sm text-[#EBD9C8]/75 leading-relaxed">{pkg.tagline}</p>
+                  <h2 className="text-2xl font-bold text-foreground leading-tight">{pkg.title}</h2>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{pkg.tagline}</p>
                 </div>
 
                 <p className="text-xs text-[#657786] uppercase tracking-wide font-medium mb-2">Ideal for</p>
-                <p className="text-sm text-[#EBD9C8]/85 leading-relaxed mb-6 flex-1">{pkg.idealFor}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{pkg.idealFor}</p>
 
                 <p className="text-xs text-[#657786] uppercase tracking-wide font-medium mb-2">Typically includes</p>
-                <ul className="space-y-2.5 mb-8 text-sm text-[#EBD9C8]/80">
+                <ul className="space-y-2.5 mb-8 text-sm text-muted-foreground">
                   {pkg.inclusions.map((line) => (
                     <li key={line} className="flex gap-2">
                       <span className="text-[#FEA02F] shrink-0 mt-0.5" aria-hidden>
@@ -78,13 +78,13 @@ export default function PackagesPage() {
             ))}
           </div>
 
-          <div className="max-w-3xl mx-auto rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center">
-            <h3 className="text-xl font-bold text-white mb-3">Custom scope</h3>
-            <p className="text-[#EBD9C8]/75 leading-relaxed mb-6">
+          <div className="max-w-3xl mx-auto rounded-3xl border border-surface-border bg-surface p-10 text-center">
+            <h3 className="text-xl font-bold text-foreground mb-3">Custom scope</h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
               Mix packages, add integrations, or start from a blank brief—we will still give you a clear written quote
               before work begins.
             </p>
-            <Button asChild variant="outline" className="border-white/25 text-white rounded-xl">
+            <Button asChild variant="outline" className="border-border text-foreground rounded-xl">
               <Link href="/get-started">Browse all services</Link>
             </Button>
           </div>

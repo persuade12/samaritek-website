@@ -245,16 +245,16 @@ export function GetStartedWizard() {
     : "We have received your enquiry. A confirmation has been sent to"
 
   return (
-    <main key={searchParams.toString()} className="min-h-screen bg-black">
+    <main key={searchParams.toString()} className="min-h-screen bg-background">
       <section className="relative pt-28 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight">
               Get <span className="text-[#FEA02F]">started</span>
             </h1>
-            <p className="text-[#EBD9C8]/80">
+            <p className="text-muted-foreground">
               {step === "done"
                 ? "You are all set."
                 : "Pick a package or a single service, answer a few questions, and we will follow up by email."}
@@ -272,7 +272,7 @@ export function GetStartedWizard() {
                   <div
                     key={s}
                     className={`h-1.5 flex-1 max-w-[5rem] rounded-full transition-colors ${
-                      current || past ? "bg-[#FEA02F]" : "bg-white/10"
+                      current || past ? "bg-[#FEA02F]" : "bg-surface-hover"
                     }`}
                     title={s}
                   />
@@ -290,7 +290,7 @@ export function GetStartedWizard() {
           {step === "pick" && (
             <div className="space-y-10">
               <div>
-                <p className="text-center text-[#EBD9C8]/70 text-sm mb-4">
+                <p className="text-center text-muted-foreground text-sm mb-4">
                   Bundled quotes for new businesses and retailers—see also{" "}
                   <Link href="/packages" className="text-[#FEA02F] hover:underline">
                     Packages &amp; quotes
@@ -306,7 +306,7 @@ export function GetStartedWizard() {
                       className="text-left rounded-2xl border border-[#FEA02F]/25 bg-[#FEA02F]/5 hover:bg-[#FEA02F]/10 hover:border-[#FEA02F]/45 p-5 transition-all"
                     >
                       <span className="text-[10px] font-semibold uppercase tracking-wider text-[#FEA02F]">Package</span>
-                      <span className="block font-semibold text-white mt-1">{pkg.title}</span>
+                      <span className="block font-semibold text-foreground mt-1">{pkg.title}</span>
                       <span className="block text-xs text-[#657786] mt-1 line-clamp-2">{pkg.tagline}</span>
                     </button>
                   ))}
@@ -314,16 +314,16 @@ export function GetStartedWizard() {
               </div>
 
               <div>
-                <p className="text-center text-[#EBD9C8]/70 text-sm mb-4">Or choose an individual service.</p>
+                <p className="text-center text-muted-foreground text-sm mb-4">Or choose an individual service.</p>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {GET_STARTED_SERVICES.map((svc) => (
                     <button
                       key={svc.slug}
                       type="button"
                       onClick={() => selectService(svc)}
-                      className="text-left rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-[#FEA02F]/40 p-5 transition-all"
+                      className="text-left rounded-2xl border border-surface-border bg-surface hover:bg-surface-hover hover:border-[#FEA02F]/40 p-5 transition-all"
                     >
-                      <span className="font-semibold text-white">{svc.title}</span>
+                      <span className="font-semibold text-foreground">{svc.title}</span>
                       <span className="block text-xs text-[#657786] mt-1 line-clamp-2">{svc.intro[0]}</span>
                     </button>
                   ))}
@@ -333,9 +333,9 @@ export function GetStartedWizard() {
           )}
 
           {step === "intro" && selection && item && (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:p-10">
-              <h2 className="text-2xl font-bold text-white mb-4">{item.title}</h2>
-              <div className="space-y-4 text-[#EBD9C8]/85 leading-relaxed mb-8">
+            <div className="rounded-3xl border border-surface-border bg-surface p-8 md:p-10">
+              <h2 className="text-2xl font-bold text-foreground mb-4">{item.title}</h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
                 {item.intro.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
@@ -348,7 +348,7 @@ export function GetStartedWizard() {
                 >
                   Continue to questions
                 </Button>
-                <Button type="button" variant="ghost" onClick={changeSelection} className="text-[#EBD9C8] hover:text-white">
+                <Button type="button" variant="ghost" onClick={changeSelection} className="text-muted-foreground hover:text-foreground">
                   {isPackage ? "Choose a different package or service" : "Choose a different service"}
                 </Button>
               </div>
@@ -356,11 +356,11 @@ export function GetStartedWizard() {
           )}
 
           {step === "questions" && selection && item && (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:p-10 space-y-6">
-              <h2 className="text-xl font-bold text-white">A few questions</h2>
+            <div className="rounded-3xl border border-surface-border bg-surface p-8 md:p-10 space-y-6">
+              <h2 className="text-xl font-bold text-foreground">A few questions</h2>
               {questionnaire(selection).map((q) => (
                 <div key={q.id}>
-                  <Label className="text-[#EBD9C8]/90 mb-2 block">
+                  <Label className="text-muted-foreground mb-2 block">
                     {q.label}
                     {q.required ? <span className="text-[#FEA02F]"> *</span> : null}
                   </Label>
@@ -368,11 +368,11 @@ export function GetStartedWizard() {
                     <select
                       value={answers[q.id] ?? ""}
                       onChange={(e) => setAnswer(q.id, e.target.value)}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#FEA02F]"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-[#FEA02F]"
                     >
                       {!q.required && <option value="">Select…</option>}
                       {q.options.map((opt) => (
-                        <option key={opt.value} value={opt.value} className="bg-black">
+                        <option key={opt.value} value={opt.value} className="bg-background">
                           {opt.label}
                         </option>
                       ))}
@@ -383,7 +383,7 @@ export function GetStartedWizard() {
                       onChange={(e) => setAnswer(q.id, e.target.value)}
                       rows={4}
                       placeholder={q.placeholder}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] resize-none"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F] resize-none"
                     />
                   ) : (
                     <input
@@ -391,13 +391,13 @@ export function GetStartedWizard() {
                       value={answers[q.id] ?? ""}
                       onChange={(e) => setAnswer(q.id, e.target.value)}
                       placeholder={q.placeholder}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F]"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F]"
                     />
                   )}
                 </div>
               ))}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button type="button" variant="ghost" onClick={() => setStep("intro")} className="text-[#EBD9C8]">
+                <Button type="button" variant="ghost" onClick={() => setStep("intro")} className="text-muted-foreground">
                   Back
                 </Button>
                 <Button
@@ -412,8 +412,8 @@ export function GetStartedWizard() {
           )}
 
           {step === "contact" && selection && item && (
-            <div className="relative rounded-3xl border border-white/10 bg-white/[0.04] p-8 md:p-10 space-y-5">
-              <h2 className="text-xl font-bold text-white">Your details</h2>
+            <div className="relative rounded-3xl border border-surface-border bg-surface p-8 md:p-10 space-y-5">
+              <h2 className="text-xl font-bold text-foreground">Your details</h2>
               <input
                 type="text"
                 value={honeypot}
@@ -425,46 +425,46 @@ export function GetStartedWizard() {
               />
 
               <div>
-                <Label className="text-[#EBD9C8]/80 mb-2 block">Name *</Label>
+                <Label className="text-muted-foreground mb-2 block">Name *</Label>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#FEA02F]"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-[#FEA02F]"
                   required
                 />
               </div>
               <div>
-                <Label className="text-[#EBD9C8]/80 mb-2 block">Email *</Label>
+                <Label className="text-muted-foreground mb-2 block">Email *</Label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#FEA02F]"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-[#FEA02F]"
                   required
                 />
               </div>
               <div>
-                <Label className="text-[#EBD9C8]/80 mb-2 block">Company</Label>
+                <Label className="text-muted-foreground mb-2 block">Company</Label>
                 <input
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#FEA02F]"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-[#FEA02F]"
                 />
               </div>
               <div>
-                <Label className="text-[#EBD9C8]/80 mb-2 block">
+                <Label className="text-muted-foreground mb-2 block">
                   {isPackage ? "Anything else for your quote?" : "Anything else?"}
                 </Label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white focus:outline-none focus:border-[#FEA02F] resize-none"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground focus:outline-none focus:border-[#FEA02F] resize-none"
                 />
               </div>
               {submitError && <p className="text-sm text-red-400">{submitError}</p>}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Button type="button" variant="ghost" onClick={() => setStep("questions")} className="text-[#EBD9C8]">
+                <Button type="button" variant="ghost" onClick={() => setStep("questions")} className="text-muted-foreground">
                   Back
                 </Button>
                 <Button
@@ -481,11 +481,11 @@ export function GetStartedWizard() {
 
           {step === "done" && (
             <div className="rounded-3xl border border-[#FEA02F]/30 bg-[#FEA02F]/5 p-10 text-center space-y-4">
-              <h2 className="text-2xl font-bold text-white">Thank you</h2>
-              <p className="text-[#EBD9C8]/90 leading-relaxed">
+              <h2 className="text-2xl font-bold text-foreground">Thank you</h2>
+              <p className="text-muted-foreground leading-relaxed">
                 {doneLine} <span className="text-[#FEA02F]">{email}</span>. Our team will get back to you soon.
               </p>
-              <Button asChild variant="outline" className="border-white/20 text-white mt-4 rounded-xl">
+              <Button asChild variant="outline" className="border-border text-foreground mt-4 rounded-xl">
                 <Link href="/">Back to home</Link>
               </Button>
             </div>

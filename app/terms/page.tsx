@@ -10,31 +10,31 @@ export const metadata: Metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <article className="relative pt-28 pb-20 px-6">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 mx-auto max-w-3xl">
           <p className="mb-4 text-sm text-[#657786]">Last updated: 1 May 2026</p>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             Terms of <span className="text-[#FEA02F]">Service</span>
           </h1>
-          <p className="mb-10 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-[#EBD9C8]/80">
+          <p className="mb-10 rounded-xl border border-surface-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
             These Terms govern your use of the SamariTek website and general rules for engaging with us. A separate
             written agreement (statement of work, master services agreement, or similar) will apply to specific
             projects where we agree one with you.
           </p>
 
-          <div className="space-y-8 text-[#EBD9C8]/85 leading-relaxed">
+          <div className="space-y-8 text-muted-foreground leading-relaxed">
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">1. Agreement</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">1. Agreement</h2>
               <p>
-                By accessing or using <strong className="text-white">samaritek.co.zw</strong> and related pages we
+                By accessing or using <strong className="text-foreground">samaritek.co.zw</strong> and related pages we
                 operate (&quot;Site&quot;), you agree to these Terms. If you do not agree, do not use the Site.
               </p>
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">2. Who we are</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">2. Who we are</h2>
               <p>
                 The Site is operated by SamariTek. Contact:{" "}
                 <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">3. Use of the Site</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">3. Use of the Site</h2>
               <p className="mb-3">You agree that you will not:</p>
               <ul className="list-disc space-y-2 pl-6 marker:text-[#FEA02F]">
                 <li>Use the Site in any way that violates applicable law or infringes others&apos; rights;</li>
@@ -60,7 +60,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">4. Information you provide</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">4. Information you provide</h2>
               <p>
                 You are responsible for the accuracy of information you submit through forms or email. You must have
                 the right to share any materials or personal data you send us in connection with an enquiry or project.
@@ -68,7 +68,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">5. Intellectual property</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">5. Intellectual property</h2>
               <p className="mb-3">
                 The Site, its branding, text, graphics, and underlying software are owned by SamariTek or our licensors
                 and are protected by intellectual property laws. You receive a limited, non-exclusive, non-transferable
@@ -82,7 +82,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">6. Third-party links</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">6. Third-party links</h2>
               <p>
                 The Site may link to third-party websites or services. We are not responsible for their content,
                 practices, or availability. Your use of third-party sites is at your own risk and subject to their
@@ -91,10 +91,10 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">7. Disclaimers</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">7. Disclaimers</h2>
               <p className="mb-3">
-                The Site and its content are provided <strong className="text-white">&quot;as is&quot;</strong> and{" "}
-                <strong className="text-white">&quot;as available&quot;</strong>. To the fullest extent permitted by
+                The Site and its content are provided <strong className="text-foreground">&quot;as is&quot;</strong> and{" "}
+                <strong className="text-foreground">&quot;as available&quot;</strong>. To the fullest extent permitted by
                 law, we disclaim all warranties, express or implied, including merchantability, fitness for a
                 particular purpose, and non-infringement.
               </p>
@@ -105,7 +105,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">8. Limitation of liability</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">8. Limitation of liability</h2>
               <p>
                 To the fullest extent permitted by applicable law, SamariTek and its directors, employees, and
                 contractors will not be liable for any indirect, incidental, special, consequential, or punitive
@@ -121,7 +121,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">9. Indemnity</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">9. Indemnity</h2>
               <p>
                 You will defend and indemnify SamariTek against any claims, damages, losses, or expenses (including
                 reasonable legal fees) arising from your misuse of the Site, your violation of these Terms, or your
@@ -130,7 +130,7 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">10. Changes</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">10. Changes</h2>
               <p>
                 We may modify these Terms by posting an updated version on the Site and changing the &quot;Last
                 updated&quot; date. Material changes may also be announced where appropriate. Continued use after the
@@ -139,16 +139,16 @@ export default function TermsOfServicePage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">11. Governing law and disputes</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">11. Governing law and disputes</h2>
               <p>
-                These Terms are governed by the laws of <strong className="text-white">Zimbabwe</strong>, without
+                These Terms are governed by the laws of <strong className="text-foreground">Zimbabwe</strong>, without
                 regard to conflict-of-law rules. Courts in Zimbabwe shall have non-exclusive jurisdiction, subject to
                 any mandatory provisions of the law applicable to you.
               </p>
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">12. Contact</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">12. Contact</h2>
               <p>
                 Questions about these Terms:{" "}
                 <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">

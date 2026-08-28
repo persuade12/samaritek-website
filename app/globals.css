@@ -3,8 +3,55 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated color tokens to match SamariTek brand colors */
+/* Light mode (default before .dark is applied) */
 :root {
+  color-scheme: light;
+  --background: #f3f4f6;
+  --foreground: #12141a;
+  --card: #ffffff;
+  --card-foreground: #12141a;
+  --popover: #ffffff;
+  --popover-foreground: #12141a;
+  --primary: #fea02f;
+  --primary-foreground: #0a0a0a;
+  --secondary: #e4e6eb;
+  --secondary-foreground: #12141a;
+  --muted: #e8eaee;
+  --muted-foreground: #5a6270;
+  --accent: #de6600;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: #d5d8e0;
+  --input: #d5d8e0;
+  --ring: #fea02f;
+  --chart-1: #fea02f;
+  --chart-2: #657786;
+  --chart-3: #8b7355;
+  --chart-4: #de6600;
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.75rem;
+  --cream: #6b5e52;
+  --surface: rgba(18, 20, 26, 0.04);
+  --surface-hover: rgba(18, 20, 26, 0.07);
+  --surface-border: rgba(18, 20, 26, 0.1);
+  --nav-bg: rgba(243, 244, 246, 0.88);
+  --overlay: rgba(18, 20, 26, 0.45);
+  --section-alt: #e9ebf0;
+  --hero-from: #e6e8ed;
+  --hero-to: #f3f4f6;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  color-scheme: dark;
   --background: #0a0a0a;
   --foreground: #ffffff;
   --card: #1a1a1a;
@@ -15,30 +62,37 @@
   --primary-foreground: #0a0a0a;
   --secondary: #657786;
   --secondary-foreground: #ffffff;
-  --muted: #657786;
+  --muted: #1f1f1f;
   --muted-foreground: #d1d1d1;
   --accent: #de6600;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #657786;
-  --input: #657786;
+  --border: #2a2f36;
+  --input: #2a2f36;
   --ring: #fea02f;
   --chart-1: #fea02f;
   --chart-2: #657786;
   --chart-3: #ebd9c8;
   --chart-4: #de6600;
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.75rem;
   --cream: #ebd9c8;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(0, 0, 0, 0.8);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --section-alt: #111111;
+  --hero-from: #1a1a1a;
+  --hero-to: #0a0a0a;
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 @theme inline {
@@ -69,6 +123,14 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-cream: var(--cream);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-border: var(--surface-border);
+  --color-nav-bg: var(--nav-bg);
+  --color-overlay: var(--overlay);
+  --color-section-alt: var(--section-alt);
+  --color-hero-from: var(--hero-from);
+  --color-hero-to: var(--hero-to);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -88,11 +150,15 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(ellipse 90% 55% at 50% -25%, color-mix(in srgb, var(--primary) 16%, transparent), transparent),
+      radial-gradient(ellipse 50% 40% at 100% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent),
+      radial-gradient(ellipse 40% 30% at 0% 100%, color-mix(in srgb, var(--primary) 6%, transparent), transparent);
+    background-attachment: fixed;
   }
 }
 
-/* Added custom animations and utilities for SamariTek */
 @keyframes gradient-flow {
   0%,
   100% {

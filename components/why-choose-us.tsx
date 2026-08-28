@@ -59,17 +59,17 @@ export function WhyChooseUs() {
   }, [])
 
   return (
-    <section className="py-32 px-6 bg-[#111111] relative overflow-hidden">
+    <section className="py-32 px-6 bg-section-alt relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#FEA02F] to-transparent opacity-50" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="mb-20 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
+          <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6 text-balance">
             Why Choose <span className="text-[#FEA02F]">SamariTek</span>?
           </h2>
-          <p className="text-xl text-[#d1d1d1] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Standards, innovation, and people who understand your domain—so delivery matches both the letter of what
             matters and the reality of how you work.
           </p>
@@ -85,18 +85,14 @@ export function WhyChooseUs() {
                 ref={(el) => {
                   cardRefs.current[index] = el
                 }}
-                className={`group relative p-10 rounded-2xl backdrop-blur-sm transition-all duration-700 ${
+                className={`group relative p-10 rounded-2xl border border-surface-border bg-card/80 backdrop-blur-sm shadow-sm dark:shadow-none transition-all duration-700 ${
                   visibleCards.has(index)
                     ? "opacity-100 translate-x-0"
                     : index % 2 === 0
                       ? "opacity-0 -translate-x-10"
                       : "opacity-0 translate-x-10"
                 }`}
-                style={{
-                  background: "rgba(235, 217, 200, 0.05)",
-                  border: "1px solid rgba(235, 217, 200, 0.15)",
-                  transitionDelay: `${index * 150}ms`,
-                }}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Icon with glow */}
                 <div className="mb-6 relative">
@@ -107,10 +103,10 @@ export function WhyChooseUs() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#FEA02F] transition-colors duration-300">
+                <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-[#FEA02F] transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-lg text-[#d1d1d1] leading-relaxed">{feature.description}</p>
+                <p className="text-lg text-muted-foreground leading-relaxed">{feature.description}</p>
               </div>
             )
           })}

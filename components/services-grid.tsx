@@ -84,13 +84,13 @@ export function ServicesGrid() {
   }, [])
 
   return (
-    <section id="our-solutions" className="scroll-mt-20 py-32 px-6 bg-[#0a0a0a] relative">
+    <section id="our-solutions" className="scroll-mt-20 py-32 px-6 bg-background relative">
       {/* Section header */}
       <div className="max-w-7xl mx-auto mb-20 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 text-balance">
+        <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6 text-balance">
           Our <span className="text-[#FEA02F]">Solutions</span>
         </h2>
-        <p className="text-xl text-[#d1d1d1] max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           Technology services for organisations across Africa—from discovery to deployment and beyond.
         </p>
       </div>
@@ -110,11 +110,7 @@ export function ServicesGrid() {
             >
               <Link
                 href={`/get-started?service=${encodeURIComponent(service.getStartedSlug)}`}
-                className="group relative flex h-full min-h-[17rem] flex-col rounded-2xl p-8 backdrop-blur-sm transition-all duration-500 hover:scale-105 cursor-pointer"
-                style={{
-                  background: "rgba(235, 217, 200, 0.03)",
-                  border: "1px solid rgba(235, 217, 200, 0.1)",
-                }}
+                className="group relative flex h-full min-h-[17rem] flex-col rounded-2xl border border-surface-border bg-surface p-8 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:bg-surface-hover cursor-pointer shadow-sm dark:shadow-none"
               >
               {/* Hover glow effect */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-[#DE6600]/20 to-transparent pointer-events-none" />
@@ -127,10 +123,10 @@ export function ServicesGrid() {
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#FEA02F] transition-colors duration-300 shrink-0">
+              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-[#FEA02F] transition-colors duration-300 shrink-0">
                 {service.title}
               </h3>
-              <p className="flex-1 text-[#d1d1d1] leading-relaxed mb-4">{service.description}</p>
+              <p className="flex-1 text-muted-foreground leading-relaxed mb-4">{service.description}</p>
 
               {/* Learn more link */}
               <div className="mt-auto flex shrink-0 items-center gap-2 text-[#FEA02F] font-semibold group-hover:gap-3 transition-all duration-300">

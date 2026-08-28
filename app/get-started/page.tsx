@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 function WizardFallback() {
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center pt-24">
-      <p className="text-[#EBD9C8]/70 text-sm">Loading…</p>
+    <main className="min-h-screen bg-background flex items-center justify-center pt-24">
+      <p className="text-muted-foreground text-sm">Loading…</p>
     </main>
   )
 }

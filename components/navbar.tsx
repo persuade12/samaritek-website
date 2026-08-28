@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -51,7 +52,9 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || menuOpen ? "bg-black/80 backdrop-blur-2xl border-b border-white/10 shadow-lg" : "bg-transparent"
+        scrolled || menuOpen
+          ? "bg-nav-bg backdrop-blur-2xl border-b border-border shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -62,7 +65,7 @@ export function Navbar() {
               alt="SamariTek"
               width={160}
               height={56}
-              className="h-9 w-auto object-contain object-left transition-transform group-hover:scale-105 md:h-10"
+              className="h-9 w-auto object-contain object-left transition-transform group-hover:scale-105 md:h-10 mix-blend-multiply dark:mix-blend-normal"
               priority
             />
           </Link>
@@ -74,8 +77,8 @@ export function Navbar() {
                 href={link.href}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   pathname === link.href
-                    ? "text-white bg-white/10"
-                    : "text-[#EBD9C8]/70 hover:text-white hover:bg-white/5"
+                    ? "text-foreground bg-surface"
+                    : "text-muted-foreground hover:text-foreground hover:bg-surface"
                 }`}
               >
                 {link.label}
@@ -83,7 +86,8 @@ export function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
             <Button
               asChild
               size="sm"
@@ -93,16 +97,19 @@ export function Navbar() {
             </Button>
           </div>
 
-          <button
-            type="button"
-            className="md:hidden rounded-lg p-2 text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEA02F]/60"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav-menu"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            {menuOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
-          </button>
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="rounded-lg p-2 text-foreground hover:bg-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEA02F]/60"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav-menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -110,7 +117,7 @@ export function Navbar() {
         <>
           <button
             type="button"
-            className="fixed inset-0 top-16 z-[55] bg-black/70 md:hidden"
+            className="fixed inset-0 top-16 z-[55] bg-overlay md:hidden"
             aria-label="Close menu"
             onClick={() => setMenuOpen(false)}
           />
@@ -119,7 +126,7 @@ export function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Site navigation"
-            className="fixed left-0 right-0 top-16 z-[60] max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-white/10 bg-[#0a0a0a]/98 px-6 py-4 shadow-2xl backdrop-blur-xl md:hidden"
+            className="fixed left-0 right-0 top-16 z-[60] max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border bg-background/98 px-6 py-4 shadow-2xl backdrop-blur-xl md:hidden"
           >
             <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
@@ -128,8 +135,8 @@ export function Navbar() {
                     href={link.href}
                     className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
                       pathname === link.href
-                        ? "bg-white/10 text-white"
-                        : "text-[#EBD9C8]/90 hover:bg-white/5 hover:text-white"
+                        ? "bg-surface text-foreground"
+                        : "text-muted-foreground hover:bg-surface hover:text-foreground"
                     }`}
                     onClick={() => setMenuOpen(false)}
                   >

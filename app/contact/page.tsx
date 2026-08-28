@@ -83,16 +83,16 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+            <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
               Contact <span className="text-[#FEA02F]">SamariTek</span>
             </h1>
-            <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Whether you are scaling a product or modernising operations, we help teams across Africa turn ideas into
               reliable software. Share your requirements or objectives—we will respond on{" "}
               <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
@@ -103,20 +103,20 @@ export default function ContactPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10">
-              <h2 className="text-3xl font-bold text-white mb-8">Send us a message</h2>
+            <div className="bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-10">
+              <h2 className="text-3xl font-bold text-foreground mb-8">Send us a message</h2>
 
               {success ? (
                 <div className="rounded-2xl border border-[#FEA02F]/30 bg-[#FEA02F]/5 p-8 text-center space-y-4">
-                  <p className="text-lg font-semibold text-white">Message sent</p>
-                  <p className="text-[#EBD9C8]/90 text-sm leading-relaxed">
+                  <p className="text-lg font-semibold text-foreground">Message sent</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     Thank you. We have emailed you a short confirmation. Our team will read your message and reply as
                     soon as we can.
                   </p>
                   <Button
                     type="button"
                     variant="outline"
-                    className="border-white/20 text-white rounded-xl"
+                    className="border-border text-foreground rounded-xl"
                     onClick={() => setSuccess(false)}
                   >
                     Send another message
@@ -135,42 +135,42 @@ export default function ContactPage() {
                   />
 
                   <div>
-                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Name</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Name</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F] transition-colors"
                       placeholder="Your name"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Email</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Email</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F] transition-colors"
                       placeholder="your@email.com"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Company</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Company</label>
                     <input
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F] transition-colors"
                       placeholder="Your company"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Subject</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Subject</label>
                     <ContactSubjectCombobox
                       value={formData.subject}
                       invalid={subjectError}
@@ -187,12 +187,12 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#EBD9C8]/80 mb-2">Message</label>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Message</label>
                     <textarea
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       rows={5}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder-[#EBD9C8]/40 focus:outline-none focus:border-[#FEA02F] transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-surface border border-border rounded-xl text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-[#FEA02F] transition-colors resize-none"
                       placeholder="Tell us about your project..."
                       required
                     />
@@ -213,9 +213,9 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-8">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+              <div className="bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-8">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -224,7 +224,7 @@ export default function ContactPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Email</h3>
+                <h3 className="text-xl font-bold text-foreground mb-2">Email</h3>
                 <a
                   href="mailto:info@samaritek.co.zw"
                   className="text-[#FEA02F] hover:underline block font-medium"
@@ -233,9 +233,9 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8">
+              <div className="bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-8">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FEA02F] to-[#DE6600] flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-7 h-7 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -250,8 +250,8 @@ export default function ContactPage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Where we work</h3>
-                <p className="text-[#EBD9C8]/70 leading-relaxed">
+                <h3 className="text-xl font-bold text-foreground mb-2">Where we work</h3>
+                <p className="text-muted-foreground leading-relaxed">
                   Remote-first engineering, partnering with organisations across the continent.
                 </p>
               </div>

@@ -10,24 +10,24 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <article className="relative pt-28 pb-20 px-6">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
         <div className="relative z-10 mx-auto max-w-3xl">
           <p className="mb-4 text-sm text-[#657786]">Last updated: 1 May 2026</p>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-5xl">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             Privacy <span className="text-[#FEA02F]">Policy</span>
           </h1>
-          <p className="mb-10 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-[#EBD9C8]/80">
+          <p className="mb-10 rounded-xl border border-surface-border bg-surface p-4 text-sm leading-relaxed text-muted-foreground">
             This policy describes how SamariTek (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) handles information when you visit{" "}
-            <strong className="text-white">samaritek.co.zw</strong> (and related pages we operate) or contact us. It is
+            <strong className="text-foreground">samaritek.co.zw</strong> (and related pages we operate) or contact us. It is
             intended as a practical summary. For specific legal questions, consult qualified counsel in your
             jurisdiction.
           </p>
 
-          <div className="space-y-8 text-[#EBD9C8]/85 leading-relaxed">
+          <div className="space-y-8 text-muted-foreground leading-relaxed">
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">1. Who we are</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">1. Who we are</h2>
               <p>
                 SamariTek provides software engineering, cloud, and related technology services. You can reach us at{" "}
                 <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">
@@ -38,22 +38,22 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">2. What we collect</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">2. What we collect</h2>
               <p className="mb-3">Depending on how you interact with us, we may process:</p>
               <ul className="list-disc space-y-2 pl-6 marker:text-[#FEA02F]">
                 <li>
-                  <strong className="text-white">Contact and enquiry data</strong> — for example name, email address,
+                  <strong className="text-foreground">Contact and enquiry data</strong> — for example name, email address,
                   company name, phone number (if you provide it), and the content of messages you send via our contact
                   forms, &quot;Get started&quot; flows, or email.
                 </li>
                 <li>
-                  <strong className="text-white">Technical and usage data</strong> — such as IP address, browser type,
+                  <strong className="text-foreground">Technical and usage data</strong> — such as IP address, browser type,
                   device type, general location derived from IP, pages viewed, and timestamps. This may be collected
                   through server logs and, where enabled, analytics tools that help us understand site performance and
                   usage in aggregate.
                 </li>
                 <li>
-                  <strong className="text-white">Cookies and similar technologies</strong> — small files or tokens used
+                  <strong className="text-foreground">Cookies and similar technologies</strong> — small files or tokens used
                   to maintain security, remember preferences where applicable, or support analytics. You can control
                   cookies through your browser settings.
                 </li>
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">3. How we use information</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">3. How we use information</h2>
               <p className="mb-3">We use personal information to:</p>
               <ul className="list-disc space-y-2 pl-6 marker:text-[#FEA02F]">
                 <li>Respond to enquiries and operate our website;</li>
@@ -73,7 +73,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">4. Legal bases (where applicable)</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">4. Legal bases (where applicable)</h2>
               <p>
                 Where data protection law requires a &quot;legal basis&quot;, we rely on appropriate grounds such as
                 consent (where we ask for it), performance of a contract or steps prior to contracting, legitimate
@@ -83,7 +83,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">5. Sharing and processors</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">5. Sharing and processors</h2>
               <p className="mb-3">
                 We do not sell your personal information. We may share data with trusted service providers who assist us
                 under contract—for example:
@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">6. Retention</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">6. Retention</h2>
               <p>
                 We keep information only as long as needed for the purposes above, including to resolve disputes,
                 enforce agreements, and meet legal, tax, or accounting requirements. Retention periods vary depending on
@@ -109,7 +109,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">7. Your choices and rights</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">7. Your choices and rights</h2>
               <p className="mb-3">
                 Depending on where you live, you may have rights to access, correct, delete, or restrict certain
                 processing of your personal information, or to object to processing or request portability. To exercise
@@ -122,7 +122,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">8. Security</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">8. Security</h2>
               <p>
                 We use reasonable technical and organisational measures to protect information against unauthorised
                 access, loss, or alteration. No method of transmission over the Internet is completely secure.
@@ -130,7 +130,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">9. Children</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">9. Children</h2>
               <p>
                 Our website and services are directed at businesses and professionals. They are not intended for
                 children under 16, and we do not knowingly collect personal information from children.
@@ -138,7 +138,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">10. Changes</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">10. Changes</h2>
               <p>
                 We may update this policy from time to time. The &quot;Last updated&quot; date at the top will change
                 when we do. Continued use of the site after changes constitutes acceptance of the updated policy where
@@ -147,7 +147,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <section>
-              <h2 className="mb-3 text-xl font-bold text-white">11. Contact</h2>
+              <h2 className="mb-3 text-xl font-bold text-foreground">11. Contact</h2>
               <p>
                 Questions about this policy:{" "}
                 <a href="mailto:info@samaritek.co.zw" className="text-[#FEA02F] hover:underline">

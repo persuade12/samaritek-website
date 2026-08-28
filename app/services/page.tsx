@@ -100,16 +100,16 @@ export default function ServicesPage() {
   ]
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-background">
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#FEA02F]/5 via-transparent to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+            <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
               Our <span className="text-[#FEA02F]">Services</span>
             </h1>
-            <p className="text-xl text-[#EBD9C8]/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               End-to-end technology for teams across Africa—from strategy and architecture to shipped software you can
               run, measure, and grow.
             </p>
@@ -120,11 +120,11 @@ export default function ServicesPage() {
               <div
                 key={i}
                 id={service.slug}
-                className="scroll-mt-28 bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-[#FEA02F]/30 transition-all duration-300 group"
+                className="scroll-mt-28 bg-surface backdrop-blur-sm border border-surface-border rounded-3xl p-8 hover:bg-surface-hover hover:border-[#FEA02F]/30 transition-all duration-300 group"
               >
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FEA02F]/20 to-[#DE6600]/20 border border-[#FEA02F]/30 flex items-center justify-center mb-6 group-hover:bg-gradient-to-br group-hover:from-[#FEA02F] group-hover:to-[#DE6600] transition-all duration-300">
                   <svg
-                    className="w-8 h-8 text-[#FEA02F] group-hover:text-white transition-colors"
+                    className="w-8 h-8 text-[#FEA02F] group-hover:text-foreground transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -133,12 +133,12 @@ export default function ServicesPage() {
                   </svg>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-[#EBD9C8]/70 mb-6 leading-relaxed">{service.description}</p>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{service.title}</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
 
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-[#EBD9C8]/60">
+                    <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <svg className="w-4 h-4 text-[#FEA02F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
@@ -158,11 +158,11 @@ export default function ServicesPage() {
           </div>
 
           <div className="max-w-4xl mx-auto mb-16 rounded-3xl border border-[#FEA02F]/25 bg-[#FEA02F]/5 px-8 py-10 text-center">
-            <h2 className="text-2xl font-bold text-white mb-3">New company or retail store?</h2>
-            <p className="text-[#EBD9C8]/80 mb-6 leading-relaxed">
-              Explore bundled <strong className="text-white font-semibold">online presence</strong>,{" "}
-              <strong className="text-white font-semibold">e‑commerce</strong>, and{" "}
-              <strong className="text-white font-semibold">digital growth</strong> packages—each quoted to your scope.
+            <h2 className="text-2xl font-bold text-foreground mb-3">New company or retail store?</h2>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              Explore bundled <strong className="text-foreground font-semibold">online presence</strong>,{" "}
+              <strong className="text-foreground font-semibold">e‑commerce</strong>, and{" "}
+              <strong className="text-foreground font-semibold">digital growth</strong> packages—each quoted to your scope.
             </p>
             <Button asChild className="bg-gradient-to-r from-[#FEA02F] to-[#DE6600] text-white rounded-xl px-8">
               <Link href="/packages">View packages &amp; request a quote</Link>
